@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="{{selectlang}}" ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<!-- 是angular官方提供的国际化模块; -->
+<!-- 是用来读取本地文件的模块, -->
+<!-- <script src="//cdn.bootcss.com/angular.js/1.3.11/angular.min.js"></script>
+<script src="//cdn.bootcss.com/angular-translate/2.5.2/angular-translate.min.js"></script> 
+<script src="//cdn.bootcss.com/angular-translate-loader-static-files/2.5.2/angular-translate-loader-static-files.min.js"></script> 
+ -->
+ <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/1.6.5/angular.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.17.1/angular-translate.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.17.1/angular-translate-loader-static-files.min.js"></script> 
+<script src="i18n/cn.js"></script> 
+<script src="i18n/en.js"></script> 
+<style type="text/css">
+	[lang|=en] {
+		color:red;
+	}
+	html {
+		
+	}
+	ul li {
+		/*border-width: 1px; */
+		border-style: solid; 
+		width:auto; 
+		display:inline-block !important; 
+		display:inline; 
+		/*float: left;*/
+	}
+</style>
+</head>
+<body>
+	<!-- //ng-change 事件触发时会执行 控制器的 switching 方法 -->
+	<!-- ng-model 到底实现了什么功能呢?这里的作用就是页面加载时下拉列表显示出当前默认使用的是哪种语言,就是定位select 默认项. -->
+	<select class="language-switching" ng-controller="LanguageSwitchingCtrl" ng-model="cur_lang" ng-change="switching(cur_lang)">
+		<option value="en">English</option>
+		<option value="cn">简体中文</option>
+	</select>
+	
+	<div ng-controller="myCtrl">
+		名字: <input ng-model="iname">
+		<h1>你输入了: {{iname}}</h1>
+		{{::iname}}
+		<p lang="en">one</p>
+		<p>two</p>
+		<div style="width: 200px; border-style: solid;border-width: 1px;">
+			<ul style="list-style: none;">
+				<li id="menu{{$index}}" ng-repeat="menu in Menus | orderBy:'sort'" on_finish>{{::menu.name}}</li>
+			</ul>
+		</div>
+		<div my_directive></div>
+		<!--
+		<a ui-sref="app.login({})">{{'login'|T}}
+    <a ui-sref="app.register({})">{{'regist'|T}}
+		-->
+		<p>{{child.router=='home.content.dataAnalyse.reportManage.dayElec'}}111</p>
+		<p ng-if="child.router=='home.content.dataAnalyse.reportManage.dayElec'">aaaaa</p>
+		<p>{{child.router}}</p>
+		<!--<p>{{m1()}}</p> -->
+		<!-- <p ng-bind="m1()"></p> 等同{{}}-->
+		{{ParsedValue}}
+		{{admissiondate | date }} 
+		<input ng-model="yourinput" type="text">
+		<br />
+		Result: {{ yourinput | capitalize_as_you_want:3:'b' }}
+		
+	</div>
+	
+	<div ng-controller="myCtrl01 as appCtrl"> 
+	<!-- angualr 1.2之后，就已经开始支持controllerAs的语法，
+	这样我们就可以不用将属性和方法挂载到$scope上，而是this上。 -->
+		<div compile="appCtrl.html"></div>
+	</div>
+	
+	<div>
+		Second I18N: <br/>
+		<span msgid="login"></span>
+		<span msgid="regist"></span><br/>
+		<button onclick="changeLang('en')">EN</button>
+		<button onclick="changeLang('cn')">CN</button>
+		
+	</div>
+
+<script>
+var lang = window.localStorage.lang||'cn';
+
+var app = angular.module('myApp', ['pascalprecht.translate']); //把 angular-translate 模块以一个依赖项加载进来
+
+app.config(function($translateProvider){ //用 $translateProvider 服务配置 $translate 服务实现
+		//使用了 localStorage.lang  来存储用户上一次选择的语言
+		//$rootScope.selectlang = lang;
+		/*sanitize - Sanitizes the complete translation including all parameters
+			sanitizeParameters -> Sanitizes only the parameters
+		The same logic applies for both escape and escapeParameters.
+
+		Note: Strategies can be combined ie.
+		$translateProvider.useSanitizeValueStrategy(['sanitize', 'escapeParameters']);*/
+		$translateProvider.useSanitizeValueStrategy('escapeParameters');
+		$translateProvider.translations('en',enObj).translations('cn',cnObj);
+		/*
+		$translateProvider.translations('en',{login:"Login", regist:"Register"})
+		.translations('cn', {login:"登录", regist:"注册"})
+		*/
+		/*
+		//https://angular-translate.github.io/docs/en/#/guide/22_unit-testing-with-angular-translate
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'i18n/',
+        suffix: '.json'
+    });
+		*/
+    $translateProvider.preferredLanguage(lang);
+});
+
+app.service('iService', function(){
+	this.myFunc = function (x) {
+			return "It is Server:"+x;
+	}
+});
+app.directive('myDirective', function (){
+//使用驼峰法来命名一个指令， myDirective, 但在使用它时需要以 - 分割,
+ return {
+	restrict : "A",
+	template : "<p>this is a directive</p>"
+ };
+});
+var menus = [];
+app.directive('onFinish', function ($timeout){
+ return {
+	restrict: 'A',
+	link : function(scope, element, attrs, accordionController) {
+			//$('menu0');
+			//console.log('onFinish'+element.width());
+			console.log('onFinish'+element[0].offsetWidth); //与element.width()相同
+			
+				/* 每个元素上加一个watch
+			scope.$watch(  
+        function () {
+					console.log("element[0].offsetWidth"+element[0].offsetWidth); //可以得到元素渲染后的宽度
+          //return element[0].offsetWidth;  
+					return element;
+        },  
+        function (newHeight, oldHeight) {  
+          if (newHeight != oldHeight) {  
+            setTimeout(function () {  
+              var height = attrs.minheight ? newHeight + parseInt(attrs.minheight) : newHeight;  
+              var message = height;  
+              window.parent.postMessage(message, "*");  
+            }, 0);// timeout needed to wait for DOM to update  
+          }
+        }  
+      );  
+				*/
+			if(scope.$last === true){
+			//这里已经可以操作Repeat产生的DOM元素了
+				$timeout(function(){
+					console.log('Repeat the last one');
+					scope.$emit('ngRepeatFinished');
+				});
+			}
+	}
+ };
+});
+
+//angular.module('myApp').controller('LanguageSwitchingCtrl', ['$scope', '$translate', function (scope, $translate) {
+//angular.module('myApp').controller('LanguageSwitchingCtrl', ['$scope', '$rootScope', '$translate', function (scope,rScope, $translate) {
+angular.module('myApp').controller('LanguageSwitchingCtrl', function ($scope,$rootScope, $translate) {
+		//接受下拉列表 option 传过来的参数值 (en 或者 cn )
+		//然后执行 $translate.use(lang) 方法.此方法实现了在运行时切换语言的功能.
+		$scope.switching = function(lang){
+        $translate.use(lang); //执行 $translate.use(lang) 方法.此方法实现了在运行时切换语言的功能.
+        window.localStorage.lang = lang; //将当前选中语言存入缓存中
+        window.location.reload(); //界面刷新
+    };
+    $scope.cur_lang = $translate.use(); 
+});
+//------定义一个filter--------
+angular.module('myApp').filter("T", ['$translate', function($translate) {
+    return function(key) {
+        if(key){
+            return $translate.instant(key);
+        }
+    };
+}]);
+//https://blog.csdn.net/wjk_along/article/details/54863602   过滤器使用方法
+app.filter('capitalize_as_you_want', function () {
+		//$scope.tt = 2; //angular.js:14642 ReferenceError: $scope is not defined
+		var v_filter = 12;
+		
+		return function (input, capitalize_index, specified_char) {
+				input = input || '';
+				var output = '';
+				var customCapIndex = capitalize_index || -1;
+				var specifiedChar = specified_char || '';
+				for (var i = 0; i < input.length; i++) {
+						// 首字母肯定是大写的， 指定的index的字母也大写
+						if (i === 0 || i === customCapIndex) {
+								output += input[i].toUpperCase();
+						} else {
+								// 指定的字母也大写
+								if (specified_char != '' && input[i] === specified_char) {
+										output += input[i].toUpperCase();
+								} else {
+										output += input[i];
+								}
+						}
+				}
+				return output;
+		};
+});
+
+
+//在javascript 脚本中使用国际化
+//服务T 返回了一个方法 T
+angular.module('myApp').factory('T', ['$translate', function($translate) {
+    var T = {
+        T:function(key) {
+            if(key){
+                return $translate.instant(key);
+            }
+            return key;
+        }
+    }
+    return T;
+}]);
+
+app.controller('myCtrl', function($scope, $rootScope, T, $translate, $parse, iService) {
+    $scope.iname = "John Doe";
+		//$scope.selectlang = "en"; //
+		$rootScope.selectlang = lang;
+		//console.log($translate.instant('login'));
+		var tmpV = 123;
+		$scope.child= {};
+		
+		$scope.child.router = "home.content.dataAnalyse.reportManage.dayElec"
+		/*
+		*/
+		var result = T.T('login');
+		console.log("T server:"+result);
+		//$rootScope.g_Value = "bbb";
+		function init(){
+			console.log('init');
+			//no $scope, $rootScope, T, $translate, why???
+			//var result = $translate.instant(['login','user.name']);
+			var result = $translate.instant('user.name');
+			console.log(result+"\t tmpV="+tmpV);
+		}
+		
+		$scope.m1 = function() {
+		//刷新页面,这个方法会运行两遍, why not one?
+		//{{m1}}会执行一次,这次会导致$scope.m1的值改变.因此又会执行一次执行.
+			console.log('m1\'s tempV is'+tmpV);
+			//no $scope, $rootScope, T, $translate
+			return "m1 111"
+		}
+		//$scope.m1();
+		var context = {
+				name: "王尼玛"
+		};
+		var expression = "'暴走 ' + name";
+		var parseFunc = function(){
+			//这种方式就只会运行一次.
+			//$parse —— 将一个AngularJS表达式转换成一个函数
+			//https://www.jianshu.com/p/e978ea808d62 
+			//集合 https://www.cnblogs.com/whitewolf/archive/2012/09/14/2684186.html    一起看
+			//$parse(expression);  //如果expression是一个函数呢.
+			console.log('parseFunc');
+		}
+		$scope.ParsedValue = parseFunc(context); //函数已经运行了,所以不会改变$scope环境,就不会触发
+		
+		console.log(iService.myFunc(55));
+		$scope.Menus = [{name:"First", sort:1},{name:"First", sort:2},{name:"First", sort:3}];
+		
+		init();
+		$scope.admissiondate  = new Date();
+		$scope.$on('ngRepeatFinished', function(event){
+			console.log("Some Dom operation in here");
+		});
+});
+
+app.controller('myCtrl01', function($scope, $compile, $timeout) {
+	var vm = this;
+	vm.html = '<h1>{{title}}</h1>\
+							<ul>\
+									<li ng-repeat="item in items">{{item}}</li>\
+							</ul>';
+	console.log('myCtrl01');
+})
+.directive('compile', function($compile) {
+		return {
+				//restrict
+				//priority 数字，可选参数 若在单个DOM元素上有多个指令，则优先级高的先执行
+				//terminal 布尔型，可选参数，可以被设置为true或者false，若设置为true，则优先级低于此指令的其他指令则无效
+				//template 字符串或者函数，可选参数。是一个函数，可接受两个参数Element与Attrs
+				//templateUrl  字符串或者函数，可选参数.
+				//replace 布尔型，默认值为false，设置为true的时候，表示可以用模板内容替换自定义的元素标签。
+				scope: { 
+				//布尔值或者对象，可选参数，默认值为false，表示继承父级作用域。
+				//如果值为true，表示继承父作用域，并创建自己的作用域（子作用域）
+				//如果为对象，{}，则表示创建一个全新的隔离作用域。
+				//使用@来进行单向文本（字符串）绑定
+					//color: '@colorAttr'
+					//使用'='进行双向绑定
+						compile: '='
+						//使用'&'调用父作用域中的函数
+						//say: '&'
+				},
+				//transclude 布尔值或者字符element，默认值为false
+				/*
+				注意：在一个指令的模板中，只能声明一次ng-transclude
+				那么问题来了，如果我们想要把嵌入内容多次放入我们的模板中怎么办？
+				可以使用$transclude，后面会讲到！也可以使用complie函数中，里面的transcludeFn参数，后面会讲到！或者使用link连接函数
+				*/
+				//10.controller 可以是一个字符串或者函数。来查找注册在应用中的控制器的构造函数,也可以直接在指令内部定义为匿名函数，同样可以注入任何服务
+				//在directive中的controller，主要职能是对外提供交互接口
+				//11.require 字符串或者数组，字符串代表另一个指令的名字，它将作为link函数的第四个参数。
+				link: function(scope, elem, attrs) {
+						scope.title = 'List';
+						scope.items = ['list1', 'list2', 'list3'];
+						var idom = $compile(scope.compile)(scope);
+						elem.html(idom);
+				}
+		}
+})
+
+</script>
+
+<span>修改输入框的值，标题的名字也会相应修改。</span>
+</body>
+</html>
+<script>
+	function changeLang(pLang){
+		let tObj = {};
+		if(pLang=="en"){
+			tObj = enObj;
+		} else {
+			tObj = cnObj;
+		}
+		$("[msgid]").each(function(index, element){
+			let mid = element.getAttribute("msgid");
+			element.innerHTML=eval("tObj."+mid);
+		});
+		$("html").attr("lang",pLang)
+	}
+	console.log(1);
+</script>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+		<button onclick="chgAV();">ChangeAxisValue</button>
+    <!-- ECharts单文件引入 -->
+    <script src="echarts-2.2.7/build/source/echarts.js"></script>
+    <script type="text/javascript">
+			// 路径配置,
+			require.config({
+					paths: {
+							echarts: 'http://echarts.baidu.com/build/dist'
+					}
+			});
+			
+			var myChart;
+			var dN = '销量';
+			var xAxisD = ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"];
+			var option = {
+				tooltip: {
+					show: true
+				},
+				legend: {
+					data:[dN]
+				},
+				xAxis : [
+					{
+						type : 'category',
+						data : xAxisD
+					}
+				],
+				yAxis : [
+					{
+						type : 'value'
+					}
+				],
+				series : [
+					{
+						"name":dN,
+						"type":"bar",
+						"data":[5, 20, 40, 10, 10, 20]
+					}
+				]
+			};
+			// 使用
+			require(
+					[
+							'echarts',
+							'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+					],
+					function (ec) {
+							// 基于准备好的dom(ec)，初始化echarts图表
+							myChart = ec.init(document.getElementById('main')); 
+							// 为echarts对象加载数据 
+							myChart.setOption(option); 
+					}
+			);
+			console.log(1);
+			function chgAV() {
+				dN = 'Num';
+				xAxisD = ["shirt","www","eee","eee","rrrr","ttt"];
+				option.legend.data=[dN];
+				option.xAxis[0].data=xAxisD;
+				option.series[0].name=dN;
+				
+				myChart.setOption(option); 
+			}
+			//--------------
+			var vN = 'zhangsan';
+			var vA = 5;
+			var strA = ['a','b','x'];
+			var vInts = [1,2,3,4]
+			//var myObj = {name:vN, age:vA, evs:strA, ints: vInts};
+			var myObj = {};
+			myObj.name = vN;
+			myObj.age = vA;
+			myObj.evs = strA;
+			myObj.ints = vInts;
+			vN = 'lisi';
+			vA = 6;
+			strA = ['e','e'];
+			vInts = [5,6,7];
+			console.log(myObj.toString());
+    </script>
+</body>

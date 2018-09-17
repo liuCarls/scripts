@@ -1,0 +1,35 @@
+<!DOCTYP html?>
+<html>
+<head>
+<script>
+/*
+	*/
+	let str="100971,100978,100969";
+	let sarr = str.split(",");
+	for (x in sarr){
+		console.log(x +"\t"+sarr[x]);
+		console.log(x +"\t"+sarr.slice(x));
+		//console.log(typeof sarr[x]); 
+		let nv = Number(sarr[x]);
+		//console.log(nv+"\t"+typeof nv);
+	}
+	//-----------
+	//注释：请注意，splice() 方法与 slice() 方法的作用是不同的，splice() 方法会直接对数组进行修改。
+	var arr = new Array();
+	/*
+	arr.push({index:'menu0', width: 20});
+	arr.push({index:'menu1', width: 30});
+	arr.push({index:'menu2', width: 40});
+	arr.push({index:'menu3', width: 50});
+	arr.push({index:'menu4', width: 60});
+	console.log(arr.length);
+	arr.splice(1,1,{index:'menu1', width: 80});
+	arr.splice(0,1,{index:'menu0', width: 80});
+	console.log(arr.length);
+	*/
+</script>
+</head>
+<body>
+
+</body>
+</html>

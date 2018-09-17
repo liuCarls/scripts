@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" id="top1">
+<head>
+<style type="text/css">
+	[lang|=en] {
+		/*color:red;*/
+	}
+	#imgTest {
+		border: solid 1px; 
+		/*width:934px; */
+		height: 589px;
+	}
+	[lang|=en] #imgTest {
+		border: solid 1px red; 
+		/*width:821px; */
+		height: 496px;
+	}
+</style>
+<script>
+	function changeLan(){
+		let ovalue = document.getElementById("top1").lang;
+		console.log(ovalue);
+		if(ovalue != "en"){
+			document.getElementById("top1").lang = "en";
+		} else {
+			document.getElementById("top1").lang = "cn";
+		}
+	}
+	
+	function movePicture(){
+		changeLan();
+		var divW = document.getElementById("imgTest").offsetWidth;
+		var divH = document.getElementById("imgTest").offsetHeight;
+		document.getElementById("iimg").style.left='-'+(936-divW)/2+'px';
+		document.getElementById("iimg").style.top='-'+(591-divH)/2+'px';
+		
+		//getElementsByName, getElementsByClassName, getElementsByTagName, getElementsByTagNameNS
+		
+	}
+	(1027,620)
+</script>
+</head>
+<body>
+	<p style="display: none">Hello!</p>
+	<p style="display: none">Hi!<span>Change Lang<span></p>
+	<button onclick="changeLan();" style="display: none"><span>Change Lang<span></button>
+	<button onclick="movePicture();"><span>ChangeSize<span></button>
+	<div ><!--style="width: 934px; height=589px"  821, 496-->
+		<div id="imgTest" style="overflow: hidden;" >
+			<img id="iimg" src="first.PNG" style="width:934px; height: 589px; position: relative" />
+		</div>
+	</div>
+	<div id="moveDiv" style="width:100px;height:100px;border:1px solid black;left:600px;position:relative"></div> 
+	<script type="text/javascript"> 
+	function doMove() { 
+	var _div=document.getElementById("moveDiv"); 
+	var _curLeft=parseInt(_div.style.left); 
+	var _distance=5; 
+	if (_curLeft-_distance>0) { 
+	_div.style.left=(_curLeft-_distance)+"px"; 
+	window.setTimeout("doMove()",50); 
+	} 
+	} 
+	doMove(); 
+	</script> 
+	
+	<div id="autoR" style="border:solid 1px red;">
+		
+	</div>
+	
+</body>
+</html>
