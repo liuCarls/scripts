@@ -1,0 +1,10 @@
+1.在tomcat的配置中,将工程目录加入,就可以在启动服务中查看到服务.
+
+2. 在命令行中进入/Tomcat路径/bin/，执行“service.bat install”：
+（开始-运行,输入cmd,cd Tomcat路径/bin,service.bat install）。
+到此为止windows服务上就增加了一个tomcat服务
+
+服务名称为Apache tomcat 7
+
+
+3.
