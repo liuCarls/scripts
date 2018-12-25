@@ -2,28 +2,14 @@
 <html lang="{{selectlang}}" ng-app="myApp">
 <head>
 <meta charset="utf-8">
-<!-- 是angular官方提供的国际化模块; -->
-<!-- 是用来读取本地文件的模块, -->
-<!-- <script src="//cdn.bootcss.com/angular.js/1.3.11/angular.min.js"></script>
-<script src="//cdn.bootcss.com/angular-translate/2.5.2/angular-translate.min.js"></script> 
-<script src="//cdn.bootcss.com/angular-translate-loader-static-files/2.5.2/angular-translate-loader-static-files.min.js"></script> 
- -->
- <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://cdn.bootcss.com/angular.js/1.6.5/angular.min.js"></script> 
-<script src="i18n/cn.js"></script> 
-<script src="i18n/en.js"></script> 
-<style type="text/css">
-	[lang|=en] {
-		color:red;
-	}
-	html {
-		
-	}
-</style>
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/1.6.5/angular.min.js"></script>
+
 </head>
 <body>
 
-	
+
 	<div ng-controller="myCtrl">
 		名字: <input ng-model="name">
 		<h1>你输入了: {{name}}</h1>
