@@ -1,0 +1,16 @@
+<header ng-style="{ height : headerHeight }">
+  <div id="logo" ng-style="{ width: logoWidth }">{{ logoText }}</div>
+  <div id="header-nav-bar">
+    <ul>
+      <li ng-repeat="n in navs" ng-click="selectMenu($event,$index);" tp-url="" ng-class="{isActiveTab : isActiveTab == $index }">{{ n[dateFormat.name] }}</li>
+    </ul>
+    <div id="zhx-tabset-content">
+    <div id="zhx-tabset-content-tabs" ng-show="isCreatedTabs.length">
+      <toogle-tip class="zhx-icon-font icon-pullleft" ng-style="{ \'width\' : toggleTipWidth }" id="toogleLeft" ng-if="hasToogleLeft" ng-click="scrollTabs(\'left\')"></toogle-tip>'+
+      <ul ng-style="{ 'left': scrollLeft }" ng-class="{ toogleLeftShow:hasToogleLeft }"></ul>
+      <toogle-tip class="zhx-icon-font icon-pullright" ng-style="{ \'width\' : toggleTipWidth }" id="toogleRight" ng-if="hasToogleRight" ng-click="scrollTabs(\'right\')"></toogle-tip>'+
+    </div>
+
+  </div>
+  </div>
+</header>

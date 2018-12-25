@@ -1,0 +1,12 @@
+{
+	"res" : [
+
+		{
+			"id"		: "001",
+			"order"		: 1,
+			"name"  	: "大学",
+			"icon"		: "iconName",
+			"url"	: "tpl/fpage/fpage.html"
+		}
+	]
+}

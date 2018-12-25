@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Provider</title>
+	<link rel="stylesheet" href="css/font/iconfont.css">
+	<link rel="stylesheet" href="css/zhx-tabFrame.style.css">
+	<script src="/libs/jquery-3.3.1.js"></script>
+	<script src="/libs/angular-1.3.11.js"></script>
+	<script src="/libs/ocLazyLoad.js"></script>
+	<script src="/libs/angular-ui-router.0.2.13.js"></script>
+	<!-- <script src="tab-frame.js"></script> -->
+	<script src="common.js"></script>
+	<link rel="icon"
+				type="image/png"
+				href="/img/farvirate.png" />
+	</head>
+<body ng-controller="myCtrl">
+	<div id="tabset-content">
+	  <span id="tab_list">首页</span>
+		<ul id="tabs"></ul>
+	</div>
+	<div id="content-main">
+		<div id="tab_list_content">
+		  <div>
+		    区域树
+		  </div>
+		  <div>
+		    <div>
+		      <ul>
+		        <li><a ng-click="select($event, 'computers')">电脑</a></li>
+		        <li><a ng-click="select($event, 'printers1')">打印机1</a></li>
+		        <li><a ng-click="select($event, 'printers2')">打印机2</a></li>
+		        <li><a ng-click="select($event, 'blabla')">其他</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</div>
+	</div>
+</body>

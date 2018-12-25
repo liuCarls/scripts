@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="zhxProject">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS tab demo with ocLazyLoad</title>
+
+	<link rel="stylesheet" href="css/font/iconfont.css">
+
+	<!-- <link rel="stylesheet" href="lib/tab-frame/zhx-tabFrame.style.css"> -->
+	<link rel="stylesheet" href="lib/tab-frame/dist/zhx-tabFrame.style.min.css">
+
+
+	<script src="lib/jquery/dist/jquery.min.js"></script>
+	<script src="lib/angular/angular.js"></script>
+	<!-- <script src="lib/angular/angular.min.js"></script> -->
+	<script src="lib/oclazyload/dist/ocLazyLoad.min.js"></script>
+
+	<script src="lib/tab-frame/zhx-tab-frame4.js"></script>
+	<!-- <script src="lib/tab-frame/dist/zhx-tab-frame.min.js"></script -->
+
+	<!-- <script src="js/common.js"></script> -->
+	<script src="common2.js"></script>
+
+</head>
+<body ng-controller="AppCtrl">
+
+	<!-- ZHX FRAME
+	browser support list:
+		IE10.0+ ( best for IE11+ ) / Chrome 21+ / FireFox 28+ / Opera 12.1+ / Safari 6.1+
+	javascript support list:
+		jQuery 2.1.3
+		AngularJS 1.3.7
+		oc.LazyLoad 1.0.9
+	icon support : Alibaba http://www.iconfont.cn/
+	-->
+	<!-- <zhx-main-frame> -->
+		<!-- header part / logo / navbar / settings
+	-->
+		<!-- <zhx-head></zhx-head> -->
+		<!-- main view / left navigation / tabs / content -->
+		<!-- <zhx-tab-set></zhx-tab-set> -->
+	<!-- </zhx-main-frame> -->
+
+	<!-- 进度2 -->
+	<!-- <zhx-main-frame> -->
+		<!-- header part / logo / navbar / settings
+	-->
+		<!-- <zhx-head></zhx-head> -->
+		<!-- main view / left navigation / tabs / content -->
+		<!-- <zhx-tab-set></zhx-tab-set> -->
+		<!-- <div id="zhx-tabset-wrap"></div> -->
+	<!-- </zhx-main-frame> -->
+
+
+	<!-- 一个加载Module例子 -->
+	<!-- <div id="teModule" oc-lazy-load="teModule">
+		<ng-include src="'tpl/mloadT/test.html'"></ng-include>
+	</div> -->
+	<!-- 进度3 -->
+	<header ng-style="{ height : headerHeight }" class="ng-scope" style="height: 40px;"><div id="logo" ng-style="{ width: logoWidth }" class="ng-binding" style="width: 200px;">ZhongHangXun</div><div id="header-nav-bar"><ul><!-- ngRepeat: n in navs --><li ng-repeat="n in navs" ng-click="navTheTabs($event,$index);" ng-class="{isActiveTab : isActiveTab == $index }" class="ng-binding ng-scope isActiveTab">大学</li><!-- end ngRepeat: n in navs --><li ng-repeat="n in navs" ng-click="navTheTabs($event,$index);" ng-class="{isActiveTab : isActiveTab == $index }" class="ng-binding ng-scope">论语</li><!-- end ngRepeat: n in navs --><li ng-repeat="n in navs" ng-click="navTheTabs($event,$index);" ng-class="{isActiveTab : isActiveTab == $index }" class="ng-binding ng-scope">名著</li><!-- end ngRepeat: n in navs --></ul></div><div id="header-control" ng-click="showSlideSetting($event);" style="cursor:pointer;" class="zhx-icon-font icon-moreandroid"></div><div id="zhx-slide-settings" ng-style="{ right : $parent.showSlideSetting ? 0 : -$parent.slideSettingWidth, width: $parent.slideSettingWidth }" style="right: -120px; width: 120px;"><!-- ngInclude: settingMenuUrl --><div ng-include="settingMenuUrl" class="ng-scope"><div id="zhx-setting-menu" class="ng-scope">
+			<div id="userInfo">
+				<div id="userAvatar" class="zhx-icon-font icon-peoplefill"></div>
+				<div id="userName">Administrator</div>
+			</div>
+			<ul>
+				<!-- <li><span class="zhx-icon-font icon-navigation"></span>隐藏侧边栏</li> -->
+				<!-- <li class="setting-menu-hr"></li> -->
+				<li><span class="zhx-icon-font icon-lock"></span>修改密码</li>
+				<li><span class="zhx-icon-font icon-my"></span>注销登录</li>
+			</ul>
+		</div></div></div></header>
+		
+	<div id="zhx-tabset-wrap"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="zhxProject">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS tab demo with ocLazyLoad</title>
+
+	<link rel="stylesheet" href="css/font/iconfont.css">
+
+	<!-- <link rel="stylesheet" href="lib/tab-frame/zhx-tabFrame.style.css"> -->
+	<link rel="stylesheet" href="lib/tab-frame/dist/zhx-tabFrame.style.min.css">
+
+
+	<script src="lib/jquery/dist/jquery.min.js"></script>
+	<script src="lib/angular/angular.js"></script>
+	<!-- <script src="lib/angular/angular.min.js"></script> -->
+	<script src="lib/oclazyload/dist/ocLazyLoad.min.js"></script>
+
+	<script src="lib/tab-frame/zhx-tab-frame.js"></script>
+	<!-- <script src="lib/tab-frame/dist/zhx-tab-frame.min.js"></script -->
+
+	<script src="js/common.js"></script>
+
+</head>
+<body>
+
+	<!-- ZHX FRAME
+	browser support list:
+		IE10.0+ ( best for IE11+ ) / Chrome 21+ / FireFox 28+ / Opera 12.1+ / Safari 6.1+
+	javascript support list:
+		jQuery 2.1.3
+		AngularJS 1.3.7
+		oc.LazyLoad 1.0.9
+	icon support : Alibaba http://www.iconfont.cn/
+	-->
+	<zhx-main-frame>
+		<!-- header part / logo / navbar / settings
+	-->
+		<zhx-head></zhx-head>
+
+		<!-- main view / left navigation / tabs / content -->
+		<!-- <zhx-tab-set></zhx-tab-set> -->
+		<div id="zhx-tabset-wrap"></div>
+		<ng-include src="'tpl/fpage/fpage.html'"></ng-include>
+
+	</zhx-main-frame>
+
+</body>
+</html>

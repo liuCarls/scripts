@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/libs/angular-1.3.11.js"></script>
+		<script type="text/javascript">
+
+		</script>
+		<!-- 如果找不到myAppCtrl2控制器，元素<div ng-controller="myAppCtrl2">就会报
+		Argument 'myAppCtrl2' is not a function, got undefined
+				写在同一个页面就不会报这种错误了
+		-->
+		<script src="dirTest.js"></script>
+
+	</head>
+	<body ng-app="myApp" ng-controller="appCtrl">
+	<div class="box">
+		<gr-tab gr-id="tab1" gr-data="data1" ></gr-tab>
+	</div>
+	<!-- 不显示 -->
+	<my-directive></my-directive>
+	<div ng-controller="myAppCtrl">
+   <loader howToLoad="loadData()">数据加载......</loader>
+  </div>
+	<div ng-controller="myAppCtrl2">
+   <loader howToLoad="loadData2()">数据加载2......</loader>
+	 <div loader howToLoad="loadData2()">数据加载3......</div>
+  </div>
+	<!-- <gr-tab gr-id="tab1" gr-data="data1" ></gr-tab> -->
+
+	<superman strength>动感超人---力量</superman>
+	<superman strength speed>动感超人2---力量+敏捷</superman>
+	<superman strength speed light>动感超人3---力量+敏捷+发光</superman>
+
+
+	<br/>
+	Ctrl--控制器:<input type="text" ng-model="ctrFlavor" class="form-control" />
+	Directive--指令:<drink flavor="ctrFlavor"></drink>
+	<drink flavor="{{ctrFlavor}}"></drink>
+
+	Ctrl--控制器:<input type="text" ng-model="ctrFlavor2" class="form-control" />
+	Directive--指令:<drink2 flavor="ctrFlavor2"></drink2>
+
+	<greeting greet="sayHello(name)"></greeting>
+
+
+	<!--代码模板template-->
+	<script type="text/ng-template" id="sayHello.html">
+	 <div class="col-sm-12 container">
+		<form role = "form">
+		 <div class = "form-group">
+			<input type="text" class="form-control" ng-model="userName" />
+			<button class="btn btn-primary" ng-click="greet({name:userName})">Greeting</button>
+		 </div>
+		</form>
+	 </div>
+	</script>
+	<!--代码模板template-->
+
+	<ul repeater="2">
+	    <li>哈哈哈哈</li>
+	</ul>
+	</body>
+</html>

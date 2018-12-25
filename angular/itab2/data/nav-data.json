@@ -1,0 +1,101 @@
+{
+	"res" : [
+
+		{
+			"id"		: "001",
+			"order"		: 1,
+			"name"  	: "大学",
+			"icon"		: "iconName",
+			"child"	: [
+				{ 
+					"name" : "大学之道", 
+					"icon":"smallIconName", 
+					"module":"tab1", 
+					"url":"tpl/tab1.html",
+					"child" : [
+						{  "name" : "三级菜单1", "icon":"smallIconName", "module":"tabc1", "url":"tpl/child1.html" },
+						{  "name" : "三级菜单2", "icon":"smallIconName", "module":"tabc2", "url":"tpl/child2.html" }
+					] 
+				},
+				{ 
+					"name" : "在明明德", 
+					"icon":"smallIconName", 
+					"module":"tab2", 
+					"url":"tpl/tab2.html" ,
+					"child" : [
+						{  "name" : "三级长标题菜单3", "icon":"smallIconName", "module":"tabc4", "url":"tpl/child3.html" },
+						{  "name" : "三级超长标题菜单测试4", "icon":"smallIconName", "module":"tabc5", "url":"tpl/child4.html" }
+					] 
+				},
+				{ 
+					"name" : "格物致知", 
+					"icon":"smallIconName", 
+					"module":"tab3", 
+					"url":"tpl/tab3.html" ,
+					"child" : [
+						{  "name" : "三级长标题菜单5", "icon":"smallIconName", "module":"tabc6", "url":"tpl/child5.html" },
+						{  "name" : "三级长标题菜单6", "icon":"smallIconName", "module":"tabc7", "url":"tpl/child6.html" }
+					] 
+				}
+			]
+		},
+		{
+			"id"		: "002",
+			"order" 	: 2,
+			"name"   	: "论语",
+			"icon"		: "iconName",
+			"child" 	: [
+				{ 
+					"name" : "已所不欲",
+				 	"icon":"smallIconName", 
+				 	"module":"tab4", 
+				 	"url":"tpl/tab4.html" ,
+				 	"child" : []
+				 },
+				{ 
+					"name" : "勿施于人", 
+					"icon":"smallIconName", 
+					"module":"tab5", 
+					"url":"tpl/tab5.html",
+					"child" : [] 
+				},
+				{ 
+					"name" : "知者不惑", 
+					"icon":"smallIconName", 
+					"module":"tab6", 
+					"url":"tpl/tab6.html",
+					"child" : [] 
+				}
+			]
+		},
+		{
+			"id"		: "003",
+			"order" 	: 3,
+			"name"   	: "名著",
+			"icon"		: "iconName",
+			"child" 	: [
+				{ 
+					"name" : "孙子兵法", 
+					"icon":"smallIconName", 
+					"module":"tab7", 
+					"url":"tpl/tab7.html",
+					"child" : []
+				},
+				{ 
+					"name" : "资治通鉴", 
+					"icon":"smallIconName", 
+					"module":"tab8", 
+					"url":"tpl/tab8.html",
+					"child" : [] 
+				},
+				{ 
+					"name" : "二十四史", 
+					"icon":"smallIconName", 
+					"module":"tab9", 
+					"url":"tpl/tab9.html",
+					"child" : []
+				}
+			]
+		}
+	]
+}

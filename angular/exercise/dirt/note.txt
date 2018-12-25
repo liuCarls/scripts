@@ -1,0 +1,81 @@
+https://www.jb51.net/article/78616.htm
+
+
+
+当 Angular 从 HTML 中解析 directive 的时候，我们每个 directive 的解析可以大致分为 3 步。
+    initialization ：这个阶段是 Angular 在 DOM 遍历的时候第一次发现 directive 的时候执行。
+      （它只会发生一次，即便是在 DOM 中出现了多次）initialization 允许 directive 做一些初始化的工作。
+    compilation ：这个阶段 Angular 遍历 DOM ，并且收集所有的 directive 。所有 directive
+      都可以在这个阶段操作 DOM（在这个阶段，同一个 directive 在不同的 DOM 节点如果中出现了多次，
+      compilation 将会执行多次）这个阶段 scope 是还没有被附加上去，所以是无法访问到 scope 的。
+
+    linking ：这个阶段的 DOM 节点，Angular 会把所有 directive 的事件监听器（event listeners）
+      注册到 DOM 中，建立对 scope 的监听。并且把一个 scope 附加到 directive 中。这整个阶段是在
+      compilation 之后进行的。如果想要访问 scope 就可以在这个阶段进行。
+
+-----------------------------
+创建指令
+     最佳实践： 尽量返回一个对象，而不要只返回一个函数。为了防止与未来的标准冲突，最好是前缀化你自己的指令名字。
+     return {
+        restrict: string,//指令的使用方式，包括标签，属性，类，注释
+        priority: number,//指令执行的优先级
+        template: string,//指令使用的模板，用HTML字符串的形式表示
+        templateUrl: string,//从指定的url地址加载模板或<script type="text/ng-template" id="string"></script>
+
+        replace: bool,//是否用模板替换当前元素，若为false，则append在当前元素上
+        transclude: bool,//是否将当前元素的内容转移到模板中
+      
+        scope: bool or object,//指定指令的作用域
+        controller: function controllerConstructor($scope, $element, $attrs, $transclude){...},//定义与其他指令进行交互的接口函数
+        require: string,//指定需要依赖的其他指令
+        link: function postLink(scope, iElement, iAttrs) {...},//以编程的方式操作DOM，包括添加监听器等
+        compile: function compile(tElement, tAttrs, transclude){
+         return: {
+          pre: function preLink(scope, iElement, iAttrs, controller){...},
+          post: function postLink(scope, iElement, iAttrs, controller){...}
+         }
+        }//编程的方式修改DOM模板的副本，可以返回链接函数
+       };
+
+require
+   当指令使用这个选项，$compile服务会查找一个名叫myTabs的控制器，如果没有找到，就会抛出一个错误。
+   该选项的值可以分别用前缀?、^和?^进行修饰，也可以不修饰。
+   使用^前缀意味着指令将会在它的父元素上面搜索控制器，
+   使用?前缀就意味着如果在当前指令没有找到控制器，就将null作为link的第四个参数，
+   如果将?和^结合起来，我们就可以既指定上游指令，又可以在找不到时，不抛出严重的错误。
+   没有前缀修饰，指令默认只在所属元素上搜索指定的控制器。
+restrict
+  该选项指定创建指令的方式，创建方式有E（元素），A（属性），C（类名），M（注释）,
+  因此可以取值"E"，"EA"，"EAC"，"EACM"等等。
+  最佳实践：最好通过标签名和属性来使用指令而不要通过注释和类名。这样做可以更容易地看出一个元素是跟哪个指令匹配的。
+  通常注释式命名式指令使用在如下情景：某些指令需要跨越多个元素，但是受DOM API的限制，无法跨越多个元素(比如<table>元素)。
+  AngularJS 1.2 引入了ng-repeat-start和ng-repeat-end指令，作为更好的解决方案。
+  建议开发者使用这种方式，而不要用“自定义注释”形式的指令。什么情况下该用元素名，什么情况下该用属性名？
+  当创建一个含有自己模板的组件的时候，建议使用元素名，常见情况是，当你想为你的模板创建一个DSL（特定领域语言）的时候。
+  如果仅仅想为已有的元素添加功能，建议使用属性名。
+
+scope
+  该选项给指令创建独立作用域。如果指令没有创建独立作用域，那么指令在给定的作用域内仅能使用一次，
+  要重用该指令就必须为它新创建一个控制器。
+  最佳实践：如果要使你的组件在应用范围内可重用，
+  那么使用scope选项去创建一个独立作用域。如上代码所示，customerInfo 对应为指令独立作用域里的customerInfo属性
+  值（'=info'）告诉$compile这里绑定了所在元素的info属性，而info属性就 可绑定父作用域的属性，
+  即可达到指令内部作用域与父作用域通信的目的。注意: 指令作用域选项中的'=attr'属性名是被规范化过后的名字.
+  比如要绑定<div bind-to-this="thing">,你就要使用'=bindToThis'的绑定。scope的绑定策略：=代表与父作用域中的属性双向绑定，
+  @代表把当前属性作为字符串传递，也可绑定父作用域的值，&代表传递一个来自父作用域的函数，稍后调用。
+template && templateUrl
+  指令使用的模版。
+  最佳实践：除非你的模板非常小，否则最好分割成单独的hmtl文件，然后使用templateUrl选项来加载。
+link
+  指 令修改DOM通常是在link选项中，link选项接受一个带有如下签名的函数 function link(scope,element,attrs,ctrls) {...}
+  其中： scope是一个Angular的scope 对象.，element 指令匹配的jqLite封装的元素(angular内部实现的类jquery的库) ，
+  attrs 是一个带有规范化后属性名字和相应值的对象，ctrls是指令依赖的所有控制器集合。
+  被angular编译过的DOM元素被移除的时候， 它会触发一个$destroy 事件。
+  最佳实践： 指令应该自己管理自身分配的内存。当指令被移除时， 你可以使用element.on('$destroy', ...)
+  或scope.$on('$destroy', ...)来执行一个清理的工作。
+transclude
+  该选项使得指令所包裹的内容能够访问指令外部的作用域。
+  最佳实践: 仅当你要创建一个包裹任意内容的指令的时候使用transclude: true。
+controller
+  该选项可为指令定义一个控制器，然后其它指令通过require去查找这个控制器，并将该控制器的示例作为link函数第四个参数进行调用。
+  最佳实践: 当你想暴露一个API给其它的指令调用那就用controller,否则用link。
