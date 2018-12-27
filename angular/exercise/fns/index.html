@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html  >
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/libs/angular-1.3.11.js"></script>
+		<script type="text/javascript">
+
+		</script>
+		<!-- 如果找不到myAppCtrl2控制器，元素<div ng-controller="myAppCtrl2">就会报
+		Argument 'myAppCtrl2' is not a function, got undefined
+				写在同一个页面就不会报这种错误了
+		-->
+		<script src="fns.js"></script>
+
+	</head>
+	<body ng-app="myApp" ng-controller="appCtrl">
+		{{data.count}}
+		<input type="text" value="" ng-model="data.name"/><button ng-click="delWatch()">不监听</button>
+		<br/>
+		<button ng-mousedown="count = count + 1" ng-init="count=0">on mouse down</button>{{count}}
+
+		<input type="button" value="set color" ng-click="myStyle={color:'red'}">
+		<input type="button" value="set background" ng-click="myStyle={'background-color':'blue', color: 'black'}">
+		<span ng-style="myStyle">Sample Text</span>
+
+		<input ng-model="currentMetric"/>
+		<drop-down selecttitle="currentMetric" lidata="metricNameList" click-Change="changeSelect()"></drop-down>
+	</body>
+</html>

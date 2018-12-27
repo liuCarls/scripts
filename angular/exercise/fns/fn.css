@@ -1,0 +1,43 @@
+.ddl{
+    position: relative;
+    padding:2px;
+    cursor: pointer;
+    background-color: rgb(192, 55, 55);
+    width:254px;
+    float: left;
+}
+.ddlTitle{
+    height: 40px;
+    line-height: 35px;
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: solid #cccccc 1px;
+    font-size: 13px;
+}
+.ddlTitle span{
+    margin-right: 10px;
+    color: #58D0E1;
+    padding-left: 5px;
+}
+.ddl ul li{
+    list-style:none;
+    border-top: dotted #cccccc 1px;
+    line-height: 40px;
+    padding-left: 5px;
+}
+.ddl ul{
+    position:absolute;
+    top:40px;
+    width:250px;
+    left:2px;
+    border: solid #cccccc 1px;
+    z-index: 3;
+    background-color: white;
+    padding:2px;
+}
+.ddli{
+    font-size: 20px;
+    float: right;
+    margin-top: 5px;
+}

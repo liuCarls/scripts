@@ -11,4 +11,7 @@ tab1.controller('testCtrl', ['$scope', function($scope){
   $scope.closeTab = function(tabId, event){
     console.log("child:"+tabId);
   }
+  $scope.contextMenu = function(){
+    console.log('child contextMenu')
+  }
 }]);

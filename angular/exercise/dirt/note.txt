@@ -38,6 +38,7 @@ https://www.jb51.net/article/78616.htm
        };
 
 require
+   需要传入一个directive controller的名称。其实就是另外一个directive的名称。
    当指令使用这个选项，$compile服务会查找一个名叫myTabs的控制器，如果没有找到，就会抛出一个错误。
    该选项的值可以分别用前缀?、^和?^进行修饰，也可以不修饰。
    使用^前缀意味着指令将会在它的父元素上面搜索控制器，
