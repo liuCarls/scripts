@@ -22,8 +22,8 @@
 
 </head>
 <body ng-controller="myCtrl">
-    <a href="javascript:;" ng-click="addTab($event, 'tabs')">Add</a>
-    <br/>
+    <!-- <a href="javascript:;" ng-click="addTab($event, 'tabs')">Add</a>
+    <br/> -->
     <!-- <br/>
     <img width="95" style="position:absolute;left: 200px" height="84">
     <br> -->
@@ -58,7 +58,7 @@
             </ul>
         </div> -->
         <!-- <drop-down selecttitle="currentMetric" lidata="metricNameList" click-Change="changeSelect()"></drop-down> -->
-        <my-menu selecttitle="menu" lidata="menus" click-Change="addTab($event,'nav', menu)"></my-menu>
+        <my-menu selecttitle="menu" lidata="menus" click-Change="addTab($event, menu)"></my-menu>
         <div id="itabs" style="width: 100%">
             <toogle-tip class="tab-icon-font icon-pullleft" ng-style="{ 'width' : toggleTipWidth }" id="toogleLeft" ng-if="hasToogleLeft" ng-mousedown="scrollTabs('left')"></toogle-tip>
             <ul ng-style="{left: scrollLeft+'px'}" ng-class="{ toogleLeftShow:hasToogleLeft }" class=""></ul>

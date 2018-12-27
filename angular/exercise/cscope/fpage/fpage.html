@@ -1,11 +1,24 @@
-//区域树
-11111111111
-//网关列表
-<!-- <div>
-  <ul ng-class='{ isChild : childrenLen,activeChild: isShowChild }' ng-style='{ height: childHeight, overflow: \"hidden\" }' ng-if='childrenLen'>
-    <li ng-click='select($event,\"nav\")' ng-class='{active : selected && !isChild,childActive : selected && isChild, isChild : isChild }' style='cursor:pointer;'>
-      <span class='zhx-icon-font icon-right' ng-if='!isChild'>111</span>
-      {{ title }}
-    </li>
-  </ul>
-</div> -->
+
+<div ng-controller="fpageCtrl">
+  //区域树
+  11111111111
+  
+  <!-- <div>
+    <ul ng-class='{ isChild : childrenLen,activeChild: isShowChild }' ng-style='{ height: childHeight, overflow: \"hidden\" }' ng-if='childrenLen'>
+      <li ng-click='select($event,\"nav\")' ng-class='{active : selected && !isChild,childActive : selected && isChild, isChild : isChild }' style='cursor:pointer;'>
+        <span class='zhx-icon-font icon-right' ng-if='!isChild'>111</span>
+        {{ title }}
+      </li>
+    </ul>
+  </div> -->
+  
+  {{text}}
+  <table border="1">
+    <tr ng-repeat="gw in gateways" ng-click="addTab($event, gw)">
+      <td>{{ gw.name }}</td>
+      <td>{{ gw.value }}</td>
+    </tr>
+  </table>
+
+
+</div>

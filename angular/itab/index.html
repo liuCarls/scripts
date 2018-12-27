@@ -53,23 +53,29 @@
 
 
 	<!-- 一个加载Module例子 -->
-	<!-- <div id="teModule" oc-lazy-load="teModule">
+	<!-- <div id="teModule" oc-lazy-load="teModule"> -->
+	<div id="teModule" oc-lazy-load="'tpl/mloadT/test.js'">
 		<ng-include src="'tpl/mloadT/test.html'"></ng-include>
-	</div> -->
+	</div>
 	<!-- 进度3 -->
-	<header ng-style="{ height : headerHeight }" class="ng-scope" style="height: 40px;"><div id="logo" ng-style="{ width: logoWidth }" class="ng-binding" style="width: 200px;">ZhongHangXun</div><div id="header-nav-bar"><ul><!-- ngRepeat: n in navs --><li ng-repeat="n in navs" ng-click="navTheTabs($event,$index);" ng-class="{isActiveTab : isActiveTab == $index }" class="ng-binding ng-scope isActiveTab">大学</li><!-- end ngRepeat: n in navs --><li ng-repeat="n in navs" ng-click="navTheTabs($event,$index);" ng-class="{isActiveTab : isActiveTab == $index }" class="ng-binding ng-scope">论语</li><!-- end ngRepeat: n in navs --><li ng-repeat="n in navs" ng-click="navTheTabs($event,$index);" ng-class="{isActiveTab : isActiveTab == $index }" class="ng-binding ng-scope">名著</li><!-- end ngRepeat: n in navs --></ul></div><div id="header-control" ng-click="showSlideSetting($event);" style="cursor:pointer;" class="zhx-icon-font icon-moreandroid"></div><div id="zhx-slide-settings" ng-style="{ right : $parent.showSlideSetting ? 0 : -$parent.slideSettingWidth, width: $parent.slideSettingWidth }" style="right: -120px; width: 120px;"><!-- ngInclude: settingMenuUrl --><div ng-include="settingMenuUrl" class="ng-scope"><div id="zhx-setting-menu" class="ng-scope">
+	<!-- <header ng-style="{ height : headerHeight }" class="ng-scope" style="height: 40px;">
+		<div id="logo" ng-style="{ width: logoWidth }" class="ng-binding" style="width: 200px;">ZhongHangXun</div>
+		<div id="header-nav-bar">
+			
+			</div>
+			<div id="zhx-setting-menu" class="ng-scope">
 			<div id="userInfo">
 				<div id="userAvatar" class="zhx-icon-font icon-peoplefill"></div>
 				<div id="userName">Administrator</div>
 			</div>
-			<ul>
+			<ul> -->
 				<!-- <li><span class="zhx-icon-font icon-navigation"></span>隐藏侧边栏</li> -->
 				<!-- <li class="setting-menu-hr"></li> -->
-				<li><span class="zhx-icon-font icon-lock"></span>修改密码</li>
+				<!-- <li><span class="zhx-icon-font icon-lock"></span>修改密码</li>
 				<li><span class="zhx-icon-font icon-my"></span>注销登录</li>
 			</ul>
 		</div></div></div></header>
 		
-	<div id="zhx-tabset-wrap"></div>
+	<div id="zhx-tabset-wrap"></div> -->
 </body>
 </html>
