@@ -1,35 +1,35 @@
 var app = angular.module('myApp',[]);
-  app.directive('grTab',function(){  //自定义指令
-    return {
-      restrict : 'EA', //定义标签属性
-      templateUrl : 'tabqh1.html', //外部引入html文件
-      replace : true, //把当前自定义的指令标签替换成引入的标签
-      scope : { //作用域隔离 ： 每个作用域执行的是自己的功能
-        grId : '@', //拿所有grId的字符串
-        grData : '=' //拿所有grData属性的变量名
-      },
-      link : function( scope , element , attr ){ //dom操作
-        element.delegate('a','click',function(){
-          $(this).addClass('first').siblings('a').removeClass('first');
-          $(this).siblings('div').eq($(this).index()).css('display','block').siblings('div').css('display','none')
-        });
-      }
-    };
-  })
-  app.controller('appCtrl',['$scope',function($scope){
-    $scope.data1 = [
-      {'val':'小花','title':'它是一个比较帅气的男孩儿',"img":"img/img1.png"},
-      {'val':'小兰','title':'它有着一张跟年龄不服的脸庞',"img":"img/img2.png"},
-      {'val':'小光','title':'它是一个比较任性的男孩儿',"img":"img/img3.png"},
-      {'val':'小赫','title':'它是个逗比',"img":"img/img4.png"}
-    ]
+app.directive('grTab',function(){  //自定义指令
+  return {
+    restrict : 'EA', //定义标签属性
+    templateUrl : 'tabqh1.html', //外部引入html文件
+    replace : true, //把当前自定义的指令标签替换成引入的标签
+    scope : { //作用域隔离 ： 每个作用域执行的是自己的功能
+      grId : '@', //拿所有grId的字符串
+      grData : '=' //拿所有grData属性的变量名
+    },
+    link : function( scope , element , attr ){ //dom操作
+      element.delegate('a','click',function(){
+        $(this).addClass('first').siblings('a').removeClass('first');
+        $(this).siblings('div').eq($(this).index()).css('display','block').siblings('div').css('display','none')
+      });
+    }
+  };
+})
+app.controller('appCtrl',['$scope',function($scope){
+  $scope.data1 = [
+    {'val':'小花','title':'它是一个比较帅气的男孩儿',"img":"img/img1.png"},
+    {'val':'小兰','title':'它有着一张跟年龄不服的脸庞',"img":"img/img2.png"},
+    {'val':'小光','title':'它是一个比较任性的男孩儿',"img":"img/img3.png"},
+    {'val':'小赫','title':'它是个逗比',"img":"img/img4.png"}
+  ]
 
-    $scope.ctrFlavor = "百事可乐";
-    $scope.ctrFlavor2 = "百事可乐";
-    $scope.sayHello = function(name){
-      console.log('Hello'+name);
-     }
-  }]);
+  $scope.ctrFlavor = "百事可乐";
+  $scope.ctrFlavor2 = "百事可乐";
+  $scope.sayHello = function(name){
+    console.log('Hello'+name);
+    }
+}]);
 
 
 // ------------指令与控制器之间交互----------------
@@ -52,6 +52,13 @@ app.directive('loader', function(){
   restrict: 'EA',
   template: '<div ng-transclude></div>',
   transclude: true,
+  controller: function(scope, element, attrs, transclude ){
+    scope.dirV = 'dirV';
+    scope.loaderAction = function(){
+      console.log(scope.dirV);
+      console.log('loaderAction');
+    }
+  },
   replace: true,
 	//明确对于控制器ng-controller都会创建属于自己独立的scope;对于指令若无scope:{}声明会继承控制器中的scope
 //   scope: {}, /*独立scope*/

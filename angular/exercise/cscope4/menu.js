@@ -10,7 +10,7 @@ ngApp.directive('myMenu', ['$timeout',function ($timeout) {
             disabled:'@'       //// 是否显示，支持表达式
         },
         template:'<div class="ddl" ng-click="clickLi2(data)" ng-show="disabled">'
-        +'<div class="ddlTitle" ng-mouseover="toggle()" ng-nouseleave="toggle()"><span ng-bind="selecttitle.name"></span><i class="fa fa-angle-down ddli"></i></div>'
+        +'<div class="ddlTitle" ng-mouseover="toggle()" ng-mouseleave="toggle()"><span ng-bind="selecttitle.name"></span><i class="fa fa-angle-down ddli"></i></div>'
         +'<ul ng-show="showMe">'
         +' <li ng-repeat="data in lidata" ng-click="clickLi(data)">{{data.name}}</li>'
         +'</ul>'

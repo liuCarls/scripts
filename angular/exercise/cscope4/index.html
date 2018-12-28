@@ -19,7 +19,7 @@
     <script src="/libs/ocLazyLoad.min.js"></script>
     <script src="out.js"></script>
     <script src="menu.js"></script>
-    <script src="tab.js"></script>
+
 </head>
 <body ng-controller="myCtrl">
     <!-- <a href="javascript:;" ng-click="addTab($event, 'tabs')">Add</a>
@@ -59,12 +59,11 @@
         </div> -->
         <!-- <drop-down selecttitle="currentMetric" lidata="metricNameList" click-Change="changeSelect()"></drop-down> -->
         <my-menu selecttitle="menu" lidata="menus" click-Change="addTab($event, menu)"></my-menu>
-        <!-- <div id="itabs" style="width: 100%">
+        <div id="itabs" style="width: 100%">
             <toogle-tip class="tab-icon-font icon-pullleft" ng-style="{ 'width' : toggleTipWidth }" id="toogleLeft" ng-if="hasToogleLeft" ng-mousedown="scrollTabs('left')"></toogle-tip>
             <ul ng-style="{left: scrollLeft+'px'}" ng-class="{ toogleLeftShow:hasToogleLeft }" class=""></ul>
             <toogle-tip class="tab-icon-font icon-pullright" ng-style="{ 'width' : toggleTipWidth }" id="toogleRight" ng-if="hasToogleRight" ng-mousedown="scrollTabs('right')"></toogle-tip>
-        </div> -->
-        <my-tab></my-tab>
+        </div>
     </div>
     <div id="contents"></div>
 </body>
