@@ -1,8 +1,9 @@
 
 <div ng-controller="fpageCtrl">
   //区域树
-  11111111111
-  
+  11111111111<br>
+  {{param.name}}====>{{tabId}}<br>
+  {{selected}}<br>
   <!-- <div>
     <ul ng-class='{ isChild : childrenLen,activeChild: isShowChild }' ng-style='{ height: childHeight, overflow: \"hidden\" }' ng-if='childrenLen'>
       <li ng-click='select($event,\"nav\")' ng-class='{active : selected && !isChild,childActive : selected && isChild, isChild : isChild }' style='cursor:pointer;'>
@@ -14,7 +15,7 @@
   
   {{text}}
   <table border="1">
-    <tr ng-repeat="gw in gateways" ng-click="addTab($event, gw)">
+    <tr ng-repeat="gw in gateways" ng-click="select($event, gw)">
       <td>{{ gw.name }}</td>
       <td>{{ gw.value }}</td>
     </tr>

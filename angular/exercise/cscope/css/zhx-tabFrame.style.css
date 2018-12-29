@@ -97,6 +97,7 @@ header {
     flex: 1;
     -ms-flex: 1;
     display: box;
+    width: 100px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -284,14 +285,14 @@ header {
   overflow: hidden;
   background-color: #f1f1f1; }
 
-#itabs {
+#zhx-tabset-content-tabs {
   height: 30px;
   min-height: 30px;
   user-select: none;
   overflow: hidden;
   position: relative;
   box-shadow: 10px -5px 10px #d6d5d4 inset; }
-  #itabs ul {
+  #zhx-tabset-content-tabs ul {
     position: relative;
     overflow: hidden;
     display: box;
@@ -306,7 +307,7 @@ header {
     -webkit-transition: left 0.3s ease 0s;
     -moz-transition: left 0.3s ease 0s;
     transition: left 0.3s ease 0s; }
-    #itabs ul li {
+    #zhx-tabset-content-tabs ul li {
       display: box;
       display: -webkit-box;
       display: -ms-flexbox;
@@ -327,7 +328,7 @@ header {
       -webkit-transition: background 0.2s ease 0s;
       -moz-transition: background 0.2s ease 0s;
       transition: background 0.2s ease 0s; }
-      #itabs ul li span {
+      #zhx-tabset-content-tabs ul li span {
         width: 14px;
         height: 14px;
         font-size: 12px;
@@ -345,25 +346,24 @@ header {
         justify-content: center;
         margin: 0 0 0 15px;
         border-radius: 20px; }
-      #itabs ul li span:hover {
+      #zhx-tabset-content-tabs ul li span:hover {
         color: #fff;
         background-color: #ea9190;
         text-shadow: 1px 1px 1px #b85752;
         box-shadow: 1px 1px 1px #cd645f inset; }
-    #itabs ul li:hover {
+    #zhx-tabset-content-tabs ul li:hover {
       background-color: #e3e1e1; }
-    #itabs ul li.smallActive {
+    #zhx-tabset-content-tabs ul li.smallActive {
       border-left: 1px solid #fff !important;
-      background-color: #f3f3f3 !important;
+      background-color: #120b35 !important;
       box-shadow: none !important; }
-  #itabs ul.toogleLeftShow {
-    /* margin: 0 35px !important;  */
-  }
-  #itabs #toogleLeft {
+  #zhx-tabset-content-tabs ul.toogleLeftShow {
+    margin: 0 35px !important; }
+  #zhx-tabset-content-tabs #toogleLeft {
     left: 0; }
-  #itabs #toogleRight {
+  #zhx-tabset-content-tabs #toogleRight {
     right: 0; }
-  #itabs #toogleLeft, #itabs #toogleRight {
+  #zhx-tabset-content-tabs #toogleLeft, #zhx-tabset-content-tabs #toogleRight {
     display: box;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -391,7 +391,7 @@ header {
   -ms-flex: 1;
   overflow: auto; }
 
-.tabset-contextmenu {
+.zhx-tabset-contextmenu {
   position: fixed;
   font-size: 12px;
   min-width: 150px;
@@ -400,22 +400,22 @@ header {
   border: 1px solid #c3c3c3;
   box-shadow: 0 0 15px #c3c3c3;
   background-color: #fff; }
-  .tabset-contextmenu ul {
+  .zhx-tabset-contextmenu ul {
     margin: 0;
     padding: 0; }
-  .tabset-contextmenu ul li {
-    padding: 8px 20px;
-    text-align: center;
-    border-bottom: 1px solid #e1e0e0;
-    cursor: pointer; }
-  .tabset-contextmenu ul li:hover {
-    background-color: #f2f2f2; }
-  .tabset-contextmenu ul li:last-child {
-    border-bottom: none; }
-  .tabset-contextmenu .disabled {
+    .zhx-tabset-contextmenu ul li {
+      padding: 8px 20px;
+      text-align: center;
+      border-bottom: 1px solid #e1e0e0;
+      cursor: pointer; }
+    .zhx-tabset-contextmenu ul li:hover {
+      background-color: #f2f2f2; }
+    .zhx-tabset-contextmenu ul li:last-child {
+      border-bottom: none; }
+  .zhx-tabset-contextmenu .disabled {
     color: #cbcbcb;
     cursor: default !important; }
-  .tabset-contextmenu .disabled:hover {
+  .zhx-tabset-contextmenu .disabled:hover {
     background: none !important; }
 
 #zhx-slide-settings {
@@ -500,8 +500,3 @@ header {
   #zhx-setting-menu #userName {
     margin-top: 10px;
     color: #fff; }
-
-
-#inav li{float: left; width: 180px;background:#EFEFEF} 
-#inav {line-height: 27px; width: 180px; list-style-type: none;text-align:left; position: absolute} 
-/* #inav ul a{display: block; width: 156px;text-align:left;padding-left:24px; overflow:hidden}  */

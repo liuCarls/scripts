@@ -1,14 +1,14 @@
 
-@font-face {font-family: tab-icon-font;
+@font-face {font-family: "zhx-icon-font";
   src: url('iconfont.eot?t=1464745927'); /* IE9*/
   src: url('iconfont.eot?t=1464745927#iefix') format('embedded-opentype'), /* IE6-IE8 */
   url('iconfont.woff?t=1464745927') format('woff'), /* chrome, firefox */
   url('iconfont.ttf?t=1464745927') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1464745927#tab-icon-font') format('svg'); /* iOS 4.1- */
+  url('iconfont.svg?t=1464745927#zhx-icon-font') format('svg'); /* iOS 4.1- */
 }
 
-.tab-icon-font {
-  font-family:tab-icon-font !important;
+.zhx-icon-font {
+  font-family:"zhx-icon-font" !important;
   font-size:16px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;

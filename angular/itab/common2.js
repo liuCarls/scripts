@@ -17,7 +17,7 @@ function($ocLazyLoadProvider,$controllerProvider,$compileProvider,$filterProvide
 	//需要配置框架基础属性
 	zhxFrameProvider.config({
 		//数据读取的路径，这里为URL地址，必填
-		dataUrl  : "data/nav-data2.json",
+		dataUrl  : "data/nav-data.json",
 		/**
 		 * 数据获取后的格式路径，默认data, 数据在组件中通过$http获取后，在返回对象中
 		 * 会获取数据 result.data ，这里的data为数据获取路径，如果项目数据获取路径有变化
