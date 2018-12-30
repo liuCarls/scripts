@@ -52,7 +52,7 @@
         
     }).controller('myCtrl', ['$scope',function($scope){
         // $scope.navs = [{id: "001", order: 1, name: "大学", icon: "iconName", 
-        $scope.navs = [{name:'Menu1', moduleName:'fpage/fpage.js',template:'fpage/fpage.html', type:'nav'
+        $scope.menus = [{name:'Menu1', moduleName:'fpage/fpage.js',template:'fpage/fpage.html', type:'nav'
                         },
                         {name: "Menu2", icon: "smallIconName", moduleName:'mloadT/test.js',template:'mloadT/test.html', type:'nav'}
                         ];
@@ -65,24 +65,20 @@
         return {
             restrict: "AE",
             replace: true,
+            scope: {
+                navs:'='
+            },
             controller : ['$scope',function( $scope ){
                 $scope.menu = $scope.navs[0];
                 var me = this; //表示一个空的对象，表示该指令的控制器，
-                
-                
-                // $scope.tabs = []; //所有需要生成tab
                 $scope.isCreatedTabs = [];  //已经生成的tab
-                // $scope.childrenTabs = [];	//所有具有子集（三级）菜单的选项卡集合
                 $scope.tabsWidth = 0;  //实际长度
                 $scope.tabsTipWrapWidth = 0; //可见长度
                 $scope.scrollLeft = 0;
                 //set toggleTip width px; left or right
-                $scope.toggleTipWidth = 40;
-                // $scope.contextMenu = {};
-                // $scope.createdContextMenu = false;
+                $scope.toggleTipWidth = 20;
     
                 $scope.dateFormat = menuFormat;
-                // $scope.dateFormat = zhxFrame.getDataFormat();
     
                 $scope.$watch('tabsWidth',function(nv,ov){
                     if( nv > $scope.tabsTipWrapWidth ){
@@ -103,70 +99,6 @@
                     }
                 });
                 
-                /**
-                 * paramObj,包含,title, htmlUrl, moduleUrl, needTab, type
-                 * 
-                 */
-                // me.addTab = function($event, urlObj){
-                //     console.log('addTab');
-                //     var needNew = true;
-                //     for(var value of $scope.isCreatedTabs){
-                //         if(value.name == urlObj.name){
-                //             // 打开对应工作区，定位Tab
-                //             //
-                            
-                //             this.selectTab(me);
-                //             needNew = false;
-                //             break;
-                //         }
-                //     }
-
-                //     if(needNew){
-                //         var tabScope = $scope.$new()
-                //         tabScope.tabId = tabTools.newId();
-                //         tabScope.param = urlObj;
-                //         tabScope.type = urlObj.type;
-                //         tabScope.htmlUrl = urlObj.template;
-                //         tabScope.moduleName = urlObj.moduleName;
-                //         tabScope.title = urlObj.name;
-                //         tabScope.selected = true;
-                //         this.selectTab(tabScope);
-
-                //         //选项卡内容生成与异步加载
-                //         var tpl = $compile( `<div ng-show="selected"><div id="teModule" oc-lazy-load="'`+tabScope.moduleName+`'">
-                //         <ng-include src="'`+tabScope.htmlUrl+`'"></ng-include>
-                //         </div></div>`)(tabScope);
-                //         $(tpl).addClass(tabScope.tabId);
-                //         // $(tpl).appendTo("#zhx-tabset-content-main");  //生成内容区域
-                //         $(tpl).appendTo("#contents");  //生成内容区域
-
-                //         if( tabScope.type == 'nav' ){
-                //             if($scope.isCreatedTabs.length>0&&$scope.isCreatedTabs[0].type=='nav'){
-                //                 //删除原来的菜单工作区
-                //                 let deleteWork = $scope.isCreatedTabs.shift();
-                //                 deleteWork
-                //                 $('.'+deleteWork.tabId).remove();
-                                
-                //             } 
-                //             $scope.isCreatedTabs.splice(0,0,tabScope); //菜单只保留一个工作区，并且不生产Tab
-                            
-                //         } else if(tabScope.type == 'tab'){
-                //             $scope.isCreatedTabs.push(tabScope);
-                //             //生成对应选项卡小标签
-                //             var smallTab = $compile('<li style="cursor:pointer" ng-click="addTab($event,\'tabs\')" ng-right-click="contextMenu($event);" ng-class="{ smallActive: selected }">{{ title }}<span class="tab-icon-font icon-close" style="cursor:pointer" ng-click="closeTab(\''+tabScope.tabId+'\',$event);"></span></li>')(tabScope);
-                //             $(smallTab).addClass(tabScope.tabId);
-                //             $(smallTab).appendTo("#zhx-tabset-content-tabs > ul"); //tgdn
-                //             $timeout(function(){
-                                
-                //                 $scope.addTabsWidth($(smallTab).outerWidth());
-                //                 $("#zhx-tabset-content-tabs > ul").outerWidth( $scope.getTabsWidth() + 5 );
-                //             }, 0);
-                //         }
-                //     }
-                //     //
-
-
-                // }
                 //在所有激活的选项卡中选择(active)
                 me.selectTab = function(thisTab){
                     angular.forEach( $scope.isCreatedTabs, function( tab ){
@@ -422,12 +354,12 @@
                                                     'ng-class="{ smallActive: selected }">{{ name }}' +
                                                     '<span class="zhx-icon-font icon-close" style="cursor:pointer" ng-click="closeTab(\''+ tabScope.tabId +'\',$event);"></span></li>')(tabScope);
                             $(smallTab).addClass(tabScope.tabId);
-                            $(smallTab).appendTo("#zhx-tabset-content-tabs > ul");
+                            $(smallTab).appendTo("#tabset-content-tabs > ul");
         
                             $timeout(function(){
                                 // controller.addTabsWidth( angular.element(smallTab).outerWidth() );
                                 controller.addTabsWidth($(smallTab).outerWidth());
-                                $("#zhx-tabset-content-tabs > ul").outerWidth( controller.getTabsWidth() + 5 );
+                                $("#tabset-content-tabs > ul").outerWidth( controller.getTabsWidth() + 5 );
                             },0);
                         }
                     };
@@ -445,7 +377,7 @@
                             var toggleTipWidth = controller.getToggleTipWidth();
 
                             if( evTarget.type == 'nav' ){
-                                targetTab = $("#zhx-tabset-content-tabs > ul").find("."+ scope.tabId);
+                                targetTab = $("#tabset-content-tabs > ul").find("."+ scope.tabId);
                             } else if(evTarget.type == 'tabs'){
                                 targetTab = $(event.target);
                                 angular.forEach( targetTab.prevAll("li"), function(li){
@@ -481,7 +413,7 @@
     
                         //移除以后重新计算宽度
                         controller.substractTabsWidth( eventTarget.outerWidth() );
-                        $("#zhx-tabset-content-tabs > ul").outerWidth( controller.getTabsWidth() + 5 );
+                        $("#tabset-content-tabs > ul").outerWidth( controller.getTabsWidth() + 5 );
 
                         //关闭时应自动滚动tab，不应留白
                         if( controller.getScrollLeft() !== 0 ) controller.setScrollLeft( eventTarget.outerWidth() );
@@ -493,14 +425,7 @@
     
                         //移除当前Active的tab并且会自动选择周围临近的标签
                         controller.removeCreatedTab( tabId );
-    
-                        //父作用域中的属性设置
-                        // scope.isCreated = false; 
-                        // scope.selected = false;
-    
-                        //移除当前标签作用域（此作用域为选择标签时创建的作用域tabScope）;
-                        // tabScope.$destroy();
-    
+
                         //最后如果没有任何激活的tab，则将tab总长度置为0， 这里是为了防止计算中出现的像素级的误差。
                         if( !controller.getCreatedTabs().length ) controller.substractTabsWidth( controller.getTabsWidth() );
     
@@ -514,7 +439,7 @@
                         var thisId = "." + tabId;
                         //移除除当前的其他DOM
                         $timeout(function(){
-                            $("#zhx-tabset-content-tabs li:not("+ thisId +")").each(function(){
+                            $("#tabset-content-tabs li:not("+ thisId +")").each(function(){
                                 var thisLi = $(this);
                                     thisLi.find("span").trigger("click");
                             });
@@ -529,7 +454,7 @@
                         var thisId = "." + tabId;
                         //移除除当前的其他DOM
                         $timeout(function(){
-                            $("#zhx-tabset-content-tabs").find( thisId ).nextAll().each(function(){
+                            $("#tabset-content-tabs").find( thisId ).nextAll().each(function(){
                                 var thisLi = $(this);
                                     thisLi.find("span").trigger("click");
                             });
@@ -593,117 +518,17 @@
             },
             template :
                     '<header ng-style="{ height : headerHeight }">' +
-                        // '<div id="logo" ng-style="{ width: logoWidth }">{{ logoText }}</div>' +
                         '<div id="header-nav-bar">' +
                             '<ul>' +
                                 '<li ng-repeat="n in navs" ng-click="select($event,n);" ng-class="{isActiveTab : isActiveTab == $index }">{{ n[dateFormat.name] }}</li>' +
                             '</ul>' +
                         '</div>' +
-                        // '<div id="header-control" ng-click="showSlideSetting($event);" style="cursor:pointer;" class="zhx-icon-font icon-moreandroid"></div>' +
-                        // '<div id="zhx-slide-settings" ng-style="{ right : $parent.showSlideSetting ? 0 : -$parent.slideSettingWidth, width: $parent.slideSettingWidth }">' +
-                        //     '<div ng-include="settingMenuUrl"></div>' +
-                        // '</div>' +
-                        '<div id="zhx-tabset-content-tabs" ng-show="isCreatedTabs.length">'+
+                        '<div id="tabset-content-tabs" ng-show="isCreatedTabs.length">'+
                             '<toogle-tip class="zhx-icon-font icon-pullleft" ng-style="{ \'width\' : toggleTipWidth }" id="toogleLeft" ng-if="hasToogleLeft" ng-click="scrollTabs(\'left\')"></toogle-tip>'+
                             '<ul ng-style="{ \'left\': scrollLeft +\'px\'}" ng-class="{ toogleLeftShow:hasToogleLeft }"></ul>'+
                             '<toogle-tip class="zhx-icon-font icon-pullright" ng-style="{ \'width\' : toggleTipWidth }" id="toogleRight" ng-if="hasToogleRight" ng-click="scrollTabs(\'right\')"></toogle-tip>'+
                         '</div>'+
                     '</header>'
-        }
-    
-    }]);
-    
-    /**
-     *
-     * 这里相当于处理左侧菜单具体事务前的一个预处理，将菜单分成两部分,一部分有子菜单（三级菜单），一部分没有子菜单（通过JSON中children字段数组是否为空判断）、
-     * 
-     * 如果有子菜单则需要添加对应的折叠打开事件，并使用tab指令来渲染子菜单选项
-     * 如果无子菜单则直接转为tab指令来处理最终的菜单事件与渲染
-     * 
-     * 根据接收的数据判断生成直接点击的菜单还是拥有子集的折叠菜单
-     */
-    ngApp.directive("tabf", ['$compile','$timeout',function($compile,$timeout){
-        return {
-            restrict : "E",
-            scope : {
-                title : "=",
-                tplModule : "=",
-                tplUrl : "=",
-                children : "=",
-                father : '='
-            },
-            replace : true,
-            require : "^zhxTabSet",
-            template :  "<div ng-class='{ \"tab-slide-menu\" : childrenLen }' >" +
-                            "<div ng-if='childrenLen' ng-click='showSlideMenu($event)' ng-class='{ isChildActive : isShowChild }'>" +
-                                "<span class='zhx-icon-font icon-right' ng-class='{ iconRotated : isShowChild }'></span>{{ title }}" +
-                            "</div>" +
-                            "<ul ng-class='{ isChild : childrenLen,activeChild: isShowChild }' ng-style='{ height: childHeight, overflow: \"hidden\" }' ng-if='childrenLen'>" +
-                                '<tab ng-repeat="c in children" title="c.name" tpl-module="c.tplModule" tpl-url="c.tplUrl" is-child="childrenLen" father="father"></tab>' +
-                            "</ul>" +
-                            '<tab ng-if="!childrenLen" title="title" tpl-module="tplModule" tpl-url="tplUrl" is-child="childrenLen"></tab>' +
-                        "</div>"
-            ,link : function( scope, element, attrs, controller ){
-    
-                scope.isShowChild = false;
-                scope.childHeight = 0;
-                scope.childrenLen = scope.children.length;
-    
-                //如果当前选项卡有子集（三级），则将此选项卡添加至总控制器（拥有自己选项卡 数组中，以便下面控制打开与折叠）
-                if( scope.children.length ) controller.pushChildTab(scope);
-    
-                //打开当前折叠菜单
-                scope.showSlideMenu = function(event){
-                    controller.openChildTab(scope);
-                }
-    
-            }
-        }
-    }]);
-    
-    //this directive will create the tabs and events
-    ngApp.directive("tab",['$compile','$timeout','$ocLazyLoad','zhxTabTools',function($compile,$timeout,$ocLazyLoad,zhxTabTools){
-    
-        return {
-    
-            restrict : "E",
-            scope : {
-                title : "=",
-                tplModule : "=",
-                tplUrl : "=",
-                isChild : "=",
-                father : '='
-            },
-            replace : true,
-            template : "<li ng-click='select($event,\"nav\")' ng-class='{active : selected && !isChild,childActive : selected && isChild, isChild : isChild }' style='cursor:pointer;'> " +
-                            "<span class='zhx-icon-font icon-right' ng-if='!isChild'></span>" +
-                            "{{ title }}" +
-                        "</li>",
-            require : "^zhxTabSet",
-            link : function( scope, element, attrs, controller ){
-    
-                //set attr title
-                element.attr("title", scope.title);
-                /**
-                 * scope : 导航标签作用域，父作用域
-                 * tabScope : 右侧可关闭小标签以及内容区域作用域
-                 */
-    
-                //新建一个随机ID给每一组tab
-                scope.tabId = zhxTabTools.newId();
-    
-                //为右侧整体区域创建一个作用域
-                var tabScope = {};
-    
-                scope.isCreated = false;
-    
-                //在指令初始化时候将所有导航标签初始化进数组中
-                controller.pushTab(scope);
-    
-                
-    
-            }
-    
         }
     
     }]);
