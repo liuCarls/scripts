@@ -78,8 +78,8 @@
                 $scope.scrollLeft = 0;
                 //set toggleTip width px; left or right
                 $scope.toggleTipWidth = 40;
-                $scope.contextMenu = {};
-                $scope.createdContextMenu = false;
+                // $scope.contextMenu = {};
+                // $scope.createdContextMenu = false;
     
                 $scope.dateFormat = menuFormat;
                 // $scope.dateFormat = zhxFrame.getDataFormat();
@@ -306,18 +306,8 @@
                     return $scope.tabsTipWrapWidth;
                 }
     
-                me.createContextMenu = function(scope){
-                    $scope.contextMenu = scope;
-                    $scope.createdContextMenu = true;
-                };
-    
                 me.hasToggleLR = function(){
                     return $scope.hasToogleLeft && $scope.hasToogleRight;
-                };
-    
-                me.removeContextMenu = function(){
-                    if( !$.isEmptyObject($scope.contextMenu) ) $scope.contextMenu.$destroy();
-                    $scope.createdContextMenu = false;
                 };
     
             }],
@@ -399,6 +389,11 @@
                         tabScope.name = evTarget.name;
                         tabScope.selected = true;
 
+                        //增加Tab自有属性，
+
+
+
+
                         controller.selectTab(tabScope);
     
                         //选项卡内容生成与异步加载
@@ -415,11 +410,9 @@
                         if( tabScope.type == 'nav' ){
                             if(this.isCreatedTabs.length>0&&this.isCreatedTabs[0].type=='nav'){
                                 //删除原来的菜单工作区
-                                let deleteWork = this.isCreatedTabs.shift();
-                                
+                                var deleteWork = this.isCreatedTabs.shift();
                                 $('.'+deleteWork.tabId).remove();
                                 deleteWork.$destroy();
-                                
                             } 
                             this.isCreatedTabs.splice(0,0,tabScope); //菜单只保留一个工作区，并且不生产Tab
                         } else if(tabScope.type == 'tabs') {
@@ -437,11 +430,6 @@
                                 $("#zhx-tabset-content-tabs > ul").outerWidth( controller.getTabsWidth() + 5 );
                             },0);
                         }
-    
-                        //创建完成将属性设置为true
-                        // tabScope.isCreated = true;
-                        // controller.pushCreatedTab(scope);
-    
                     };
                     /**
                      * 选中tab源，切换tab
@@ -552,13 +540,13 @@
     
                 //right-click to show context menu
                 scope.contextMenu = function(event){
-                    var me = this;
+                    //scope是顶层范围， this是当前范围
                     event.stopPropagation();
     
-                    controller.removeContextMenu();
+                    // controller.removeContextMenu();
                     $(".zhx-tabset-contextmenu").remove();
-    
-                    var contextScope = scope.$new();
+                    
+                    var contextScope = this.$new();
     
                     scope.tabsEvent = event;
     
@@ -572,9 +560,9 @@
                     };
     
                     //是否有不止一个选项卡
-                    scope.createdTabsLen = controller.getCreatedTabs().length <= 1 ? true : false;
+                    scope.createdTabsLen = controller.getCreatedTabs().length < 3;
                     //是否为最后一个选项卡
-                    scope.isTheLast= controller.isLastCreatedTab(scope);
+                    scope.isTheLast= controller.isLastCreatedTab(this);
     
                     var tip = $compile( '<div class="zhx-tabset-contextmenu" ng-style="{left:'+ scope.x +'+\'px\',top:'+ scope.y +'+\'px\'}">' +
                                         '<ul>' +
@@ -588,13 +576,15 @@
                         //移除DOM
                         $(tip).remove();
                         //移除scope
-                        controller.removeContextMenu(contextScope);
+                        contextScope.$destroy();
+                        // controller.removeContextMenu(contextScope);
+                        // $scope.contextMenu.$destroy();
                         //移除body事件
                         $("body").off("click",contextScope.removeThisTip);
     
                     }
     
-                    controller.createContextMenu(contextScope);
+                    // controller.createContextMenu(contextScope);
                     $('body').on("click",contextScope.removeThisTip);
                     $(tip).appendTo('body');
                 
