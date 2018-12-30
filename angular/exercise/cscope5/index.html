@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="myApp" id="myApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="css/font/iconfont.css">
+
+	<!-- <link rel="stylesheet" href="lib/tab-frame/zhx-tabFrame.style.css"> -->
+    <link rel="stylesheet" href="css/zhx-tabFrame.style.css">
+    <link rel="stylesheet" href="css/menu.css">
+    
+    <!-- <script src="/libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script> -->
+    <script src="/libs/angular-1.3.11.js"></script>
+
+    <script src="/libs/jquery.min.js"></script>
+    <!-- <script src="lib/angular/angular.js"></script> -->
+    <!-- <script src="lib/angular/angular.min.js"></script> -->
+    <script src="/libs/ocLazyLoad.min.js"></script>
+    <script src="out.js"></script>
+    <script src="menu.js"></script>
+    <script src="tab.js"></script>
+</head>
+<body ng-controller="myCtrl">
+    <!-- <a href="javascript:;" ng-click="addTab($event, 'tabs')">Add</a>
+    <br/> -->
+    <!-- <br/>
+    <img width="95" style="position:absolute;left: 200px" height="84">
+    <br> -->
+    <!-- <img width="95" ng-style="{'left': scrollLeft, 'position':'absolute'}" height="84"> -->
+    <!-- {{color}} -->
+    <!--  -->
+    <!-- style="color:red" -->
+    <!-- <input ng-model="myStyle"/>
+    <a ng-style="{color:'red'}" >ttt</a>
+    
+		<input type="button" value="set background" ng-click="myStyle={'background-color':'blue', color: 'black'}">
+        <span ng-style="myStyle">Sample Text</span> -->
+        <!-- <input type="button" value="set color" ng-click="myStyle={left:'100px'}">
+    <div>
+        <h1 ng-style="{left:scrollLeft}">XXXX</h1>
+        <img width="95" ng-style="myStyle" style="position:absolute" height="84">
+
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    {{scrollLeft}}
+    <input ng-model="scrollLeft"> -->
+    <!-- <a href="javascript:;" ng-click="deletTab()">DEL</a>
+    <a href="javascript:;" ng-click="choseTab()">CHOSE</a> -->
+    <div id="header-nav-bar" style="display: flex; width: 100%">
+        <!-- <div class="ddl">
+            <div class="ddlTitle" ng-mouseover="toggle()"><span ng-bind="selecttitle"></span><i class="fa fa-angle-down ddli"></i></div>
+            <ul id="inav" ng-show="showMe">
+                <li ng-repeat="n in menus" ng-click="addTab($event,'nav',n);" class="ng-binding ng-scope isActiveTab" ng-class="{isActiveTab : isActiveTab == $index }">{{ n['name'] }}</li>
+            </ul>
+        </div> -->
+        <!-- <drop-down selecttitle="currentMetric" lidata="metricNameList" click-Change="changeSelect()"></drop-down> -->
+        <my-menu selecttitle="menu" lidata="menus" click-Change="addTab($event, menu)"></my-menu>
+        <!-- <div id="itabs" style="width: 100%">
+            <toogle-tip class="tab-icon-font icon-pullleft" ng-style="{ 'width' : toggleTipWidth }" id="toogleLeft" ng-if="hasToogleLeft" ng-mousedown="scrollTabs('left')"></toogle-tip>
+            <ul ng-style="{left: scrollLeft+'px'}" ng-class="{ toogleLeftShow:hasToogleLeft }" class=""></ul>
+            <toogle-tip class="tab-icon-font icon-pullright" ng-style="{ 'width' : toggleTipWidth }" id="toogleRight" ng-if="hasToogleRight" ng-mousedown="scrollTabs('right')"></toogle-tip>
+        </div> -->
+        <my-tab></my-tab>
+    </div>
+    <div id="contents"></div>
+</body>
+</html>

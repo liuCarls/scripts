@@ -73,8 +73,8 @@
                 // $scope.tabs = []; //所有需要生成tab
                 $scope.isCreatedTabs = [];  //已经生成的tab
                 // $scope.childrenTabs = [];	//所有具有子集（三级）菜单的选项卡集合
-                $scope.tabsWidth = 0;
-                $scope.tabsTipWrapWidth = 0;
+                $scope.tabsWidth = 0;  //实际长度
+                $scope.tabsTipWrapWidth = 0; //可见长度
                 $scope.scrollLeft = 0;
                 //set toggleTip width px; left or right
                 $scope.toggleTipWidth = 40;
@@ -233,13 +233,14 @@
                  * @param  {[type]} tab [description]
                  * @return {[type]}     [description]
                  */
-                me.removeCreatedTab = function(tab){
+                me.removeCreatedTab = function(pTabId){
                     //移除时检查当前共有多少选项卡被激活，如果大于1个则需要计算，如果只有1个，则直接清空数组
                     if( $scope.isCreatedTabs.length > 1 ){
                         for( var i = 0; i < $scope.isCreatedTabs.length; i++ ){
-                            if( $scope.isCreatedTabs[i] == tab ){
+                            var vTab = $scope.isCreatedTabs[i];
+                            if( vTab.tabId == pTabId ){
                                 //直接关闭非当前，不应该自动选择其他选项卡
-                                if( tab.selected ){
+                                if( vTab.selected ){
                                     if( i < $scope.isCreatedTabs.length - 1 ){
                                         me.selectTab( $scope.isCreatedTabs[ i + 1 ] );
                                     } else {
@@ -247,6 +248,7 @@
                                     }
                                 }
                                 $scope.isCreatedTabs.splice( i, 1 );
+                                vTab.$destroy();
                             }
                         }
                     } else {
@@ -414,15 +416,16 @@
                             if(this.isCreatedTabs.length>0&&this.isCreatedTabs[0].type=='nav'){
                                 //删除原来的菜单工作区
                                 let deleteWork = this.isCreatedTabs.shift();
-                                deleteWork
+                                
                                 $('.'+deleteWork.tabId).remove();
+                                deleteWork.$destroy();
                                 
                             } 
                             this.isCreatedTabs.splice(0,0,tabScope); //菜单只保留一个工作区，并且不生产Tab
                         } else if(tabScope.type == 'tabs') {
                             this.isCreatedTabs.push(tabScope);
                             //生成对应选项卡小标签
-                            var smallTab = $compile('<li style="cursor:pointer" ng-click="select($event,this)" ng-right-click="contextMenu($event);" '+
+                            var smallTab = $compile('<li style="cursor:pointer" ng-click="select($event,this)" ng-right1-click="contextMenu($event);" '+
                                                     'ng-class="{ smallActive: selected }">{{ name }}' +
                                                     '<span class="zhx-icon-font icon-close" style="cursor:pointer" ng-click="closeTab(\''+ tabScope.tabId +'\',$event);"></span></li>')(tabScope);
                             $(smallTab).addClass(tabScope.tabId);
@@ -490,6 +493,8 @@
     
                         //移除以后重新计算宽度
                         controller.substractTabsWidth( eventTarget.outerWidth() );
+                        $("#zhx-tabset-content-tabs > ul").outerWidth( controller.getTabsWidth() + 5 );
+
                         //关闭时应自动滚动tab，不应留白
                         if( controller.getScrollLeft() !== 0 ) controller.setScrollLeft( eventTarget.outerWidth() );
     
@@ -499,14 +504,14 @@
                         $('.'+tabId).remove();
     
                         //移除当前Active的tab并且会自动选择周围临近的标签
-                        controller.removeCreatedTab( scope );
+                        controller.removeCreatedTab( tabId );
     
                         //父作用域中的属性设置
                         // scope.isCreated = false; 
                         // scope.selected = false;
     
                         //移除当前标签作用域（此作用域为选择标签时创建的作用域tabScope）;
-                        tabScope.$destroy();
+                        // tabScope.$destroy();
     
                         //最后如果没有任何激活的tab，则将tab总长度置为0， 这里是为了防止计算中出现的像素级的误差。
                         if( !controller.getCreatedTabs().length ) controller.substractTabsWidth( controller.getTabsWidth() );
@@ -547,13 +552,13 @@
     
                 //right-click to show context menu
                 scope.contextMenu = function(event){
-    
+                    var me = this;
                     event.stopPropagation();
     
                     controller.removeContextMenu();
                     $(".zhx-tabset-contextmenu").remove();
     
-                    var contextScope = tabScope.$new();
+                    var contextScope = scope.$new();
     
                     scope.tabsEvent = event;
     
@@ -571,11 +576,11 @@
                     //是否为最后一个选项卡
                     scope.isTheLast= controller.isLastCreatedTab(scope);
     
-                    var tip = $compile( '<div class="zhx-tabset-contextmenu" ng-style="{left:'+ scope.x +',top:'+ scope.y +'};">' +
+                    var tip = $compile( '<div class="zhx-tabset-contextmenu" ng-style="{left:'+ scope.x +'+\'px\',top:'+ scope.y +'+\'px\'}">' +
                                         '<ul>' +
-                                            '<li ng-click="closeTab(\''+ scope.tabId +'\',tabsEvent);removeThisTip();" >关闭标签页</li>' +
-                                            '<li ng-click="closeOthers(\''+ scope.tabId +'\',tabsEvent)" ng-class="{disabled: createdTabsLen}">关闭其他标签页</li>' +
-                                            '<li ng-click="closeTabsToRight(\''+ scope.tabId +'\',tabsEvent)" ng-class="{disabled: isTheLast || createdTabsLen}">关闭右侧标签页</li>' +
+                                            '<li ng-click="closeTab(\''+ this.tabId +'\',tabsEvent);removeThisTip();" >关闭标签页</li>' +
+                                            '<li ng-click="closeOthers(\''+ this.tabId +'\',tabsEvent);removeThisTip();" ng-class="{disabled: createdTabsLen}">关闭其他标签页</li>' +
+                                            '<li ng-click="closeTabsToRight(\''+ this.tabId +'\',tabsEvent);removeThisTip();" ng-class="{disabled: isTheLast || createdTabsLen}">关闭右侧标签页</li>' +
                                         '</ul>' +
                                         '</div>')(contextScope);
                     
@@ -756,10 +761,12 @@
     
         }
     });
+
     //extend angularjs the event of right-click directive
-    ngApp.directive("ngRightClick",['$parse',function($parse){
+    //
+    ngApp.directive("ngRight1Click",['$parse',function($parse){
         return function(scope, element, attrs) {
-            var fn = $parse(attrs.ngRightClick);
+            var fn = $parse(attrs.ngRight1Click);
             element.bind('contextmenu', function(event) {
                 scope.$apply(function() {
                     event.preventDefault();
