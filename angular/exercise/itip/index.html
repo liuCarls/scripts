@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" type="image/png" href="/img/farvirate.png" />
+    <script src="/libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/libs/angular-1.3.11.js"></script>
+    <script type="text/javascript" src="out.js"></script>
+	<title>tooltips demo</title>
+</head>
+<body ng-app="DemoApp" ng-controller="DemoCtrl">
+    <p>{{greeting.text}},Angular</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+	<div  ng-mouseover="itip2($event, 123)">
+	    <div i-tip><span>I'm a tooltip content</span></div>
+    </div>
+    
+
+</body>
+</html>

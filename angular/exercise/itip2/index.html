@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" type="image/png" href="/img/farvirate.png" />
+    <script src="/libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="/libs/angular-1.3.11.js"></script> -->
+    <!-- <script type="text/javascript" src="out.js"></script> -->
+    <script type="text/javascript" src="tips.js"></script>
+	<title>tooltips demo</title>
+</head>
+<body>
+    <a id="qiuye-shang" onmousemove="aa()">鼠标悬浮上面显示提示</a>
+    
+    <script>
+        function aa(){
+            console.log(12);
+            $("#qiuye-shang").tooltip({
+                position: "top",
+                content: '这里放文本',
+                background: "#3c4751",
+                event: "hover",
+                color: "yellow"
+            });
+        }
+    </script>
+</body>
+</html>
