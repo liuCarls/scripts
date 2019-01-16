@@ -6,17 +6,27 @@
 
 	<link rel="stylesheet" href="css/font/iconfont.css">
 	<link rel="stylesheet" href="css/zhx-tabFrame.style.css">
+	<link rel="stylesheet" href="css/header.css">
 
 
 	<script src="/libs/angular-1.3.11.js"></script>
     <script src="/libs/jquery.min.js"></script>
     <script src="/libs/ocLazyLoad.min.js"></script>
-	
+
 	<script src="out.js"></script>
+	<script src="menu.js"></script>
+	<script src="itab.js"></script>
 
 </head>
 <body ng-controller="myCtrl">
-	<zhx-tab-set navs="menus"></zhx-tab-set>
-	<div id="contents"></div>
+	<div id="header">
+		<my-menu lidata="menus" selecttitle="sMenu"></my-menu>
+		<!--<tab-set navs="menus"></tab-set>-->
+	</div>
+
+
+
+
+	<!--<div id="contents"></div>-->
 </body>
 </html>

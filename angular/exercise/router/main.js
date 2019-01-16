@@ -1,8 +1,17 @@
 'use strict';
   var app = angular.module('myApp', ['ui.router', 'oc.lazyLoad']);
-  app.controller('myCtrl1', function($scope, myProvider) {
+  app.controller('myCtrl1', function($scope, myProvider, $http) {
     // console.log(myProvider.lastName);
     console.log(myProvider.test.a);
+
+
+    $scope.httpT = function(){
+      console.log(55);
+      $http.get('https://api.github.com/users/liuwenzhuang/repos').then(function(response) {
+        console.log(22);
+      });
+    }
+    
 
   });
   // app.controller('printCtrl', function ($scope,$ocLazyLoad) {
@@ -22,7 +31,23 @@
       app.service = $provide.service;
       app.constant = $provide.constant;
 
-  }]);
+  }]).factory('timestampMarker', [function() {
+    return {
+        request: function(config) {
+            config.requestTimestamp = new Date().getTime();
+            console.log(12);
+            return config;
+        },
+        response: function(response) {
+            response.config.responseTimestamp = new Date().getTime();
+            console.log(21);
+            return response;
+        }
+    };
+}]).config(['$httpProvider', function($httpProvider) {
+  $httpProvider.interceptors.push('timestampMarker');
+}]);;
+
   // 按模块化加载其他的脚本文件
   app.constant('Modules_Config', [{
     name: 'treeControl',
