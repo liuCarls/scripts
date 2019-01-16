@@ -3,50 +3,31 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="Font-Awesome-3.2.1/css/font-awesome.min.css">
+    <meta name="referrer" content="no-referrer">
+    <link rel="stylesheet" href="/css/font-awesome-4.7.0/css/font-awesome.css">
     <!--如果是IE7将自动加载这一句-->
     <!--[if IE 7]>
     <link rel="stylesheet" href="Font-Awesome-3.2.1/css/font-awesome-ie7.min.css">
     <![endif]-->
     <style type="text/css">
-        body, div, ul, li {
-            padding: 0px;
-            margin: 0px;
-            font-size: 15px;
+        /*在所有标签前添加元素,包括自定义元素，除了最外层的html*/
+        header::before{
+            content: 'abc';
+            position: absolute;
+            padding: 5px;
+            margin: 5px;
+            /*该属性对元素进行旋转、缩放、移动或倾斜。*/
+            transform: rotate(20deg);
         }
-        .first {
-            list-style: none;
-            list-style-image: url("star.gif");
-            padding-left: 20px;
-        }
-        .second li{
-            list-style: none;
-            background: url("star.gif") no-repeat;
-            padding-left: 20px;
-        }
-        .third {
-            list-style: none;
-        }
+
+
     </style>
+    <script ></script>
 </head>
 <body>
-<h2>第一种：list-style-image(图片)</h2>
-<ul class="first">
-    <li>阿斯大法</li>
-    <li>阿斯大法</li>
-    <li>阿斯大法</li>
-</ul>
-<h2>第二种:backgroud(图片)</h2>
-<ul class="second">
-    <li>阿斯大法</li>
-    <li>阿斯大法</li>
-    <li>阿斯大法</li>
-</ul>
-<h2>第三种:Font-Awesome-3.2.1(字体库)</h2>
-<ul class="third">
-    <li><i class="icon-star"></i>阿斯大法</li>
-    <li><i class="icon-star"></i>阿斯大法</li>
-    <li><i class="icon-star"></i>阿斯大法</li>
-</ul>
+    <header>Content</header>
+    <div></div>
+    <!--<img src="http://www.divcss5.com/uploads/allimg/130108/1_130108163507_1.png"/>-->
+    <!--<img src="https://avatar.csdn.net/4/9/C/3_renfufei.jpg" />-->
 </body>
 </html>
