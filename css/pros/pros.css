@@ -1,0 +1,85 @@
+#f {
+    width: 50px;
+    height: 50px;
+    box-shadow:  5px -5px 20px #f00;
+}
+#f3{
+    position: relative;
+    z-index: 5;
+}
+/*
+
+*/
+#d1 {
+    border: solid 1px red;
+    background-color: red;
+    position: relative;
+    top: 100px;
+    left: 100px;
+    z-index: auto;
+}
+#d1_1 {
+    position: absolute;
+    background-color: #ff5f9d;
+    width: 500px;
+    display: block;
+    /*auto不能消除外层元素的影响?*/
+    z-index: auto;
+
+}
+#d11 {
+    border: solid 1px blue;
+    position: absolute;
+    width: 500px;
+    display: block;
+    background-color: blue;
+    z-index: 5;
+}
+#d2 {
+    border: solid 0.5px lightgreen;
+    width: 100px;
+    height: 50px;
+    width: max-content;
+    height: max-content;
+    position: absolute; /*默认值是static*/
+    left:150px;
+    top: 220px;
+    display: flex;
+    background-color: #ecee55;
+    /*z-index: 1;*/
+    /**
+        -- 0在默认之上,-1在默认之下.
+        -- 内部元素之间的层级关系与外部元素之间的层级关系相互独立.
+
+        在d1与d2都设置为1,则d2的所有元素都在d1元素之上,
+                    -- 同级别的z-index,文档流后面的元素比前面的在上面.
+                    -- 设置z-index的元素,影响其内部所有元素的与外部元素的显示层级,尽量不设置z-index
+        在d1与d2都不设置z-index,则d2在d1上,在d11下(不设置,不影响内部元素的层级)
+                                d21在d1上,在d11下
+                                d22在d11上
+        d1设置为1,d2不设置,则d2在d1下
+                          d21,d22在d11上,因为d21,d22的值比d11的起始元素大
+        d2设置为1,d1不设置,则d2,d21,d22在d1上,在d11下
+     */
+}
+
+#d21 {
+    position: relative;
+    border: solid 0.5px darkorchid;
+    display: block;
+    background-color: #0d5ab1;
+    z-index: 4;
+}
+#d22 {
+    position: relative;
+    border: solid 0.5px darkorchid;
+    display: block;
+    background-color: #30b13f;
+    z-index: 6;
+}
+itip {
+    position: relative;
+    display: block;
+    background-color: #8a29b1;
+    z-index: 7;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="pros.css">
+    <script src="/libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="move.js"></script>
+</head>
+<body>
+    <div id="f">
+        ffffff1
+        <div>
+            fffff2
+            <div id="f3">
+                fffff3
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id="d1">
+            <span>This is a heading</span>
+            <div>
+                <div id="d1_1">
+                    auto index
+                    <div id="d11">由于图像的 z-index 是 -1，因此它在文本的后面出现。</div>
+                </div>
+
+            </div>
+        </div>
+        <button onclick="upD11(event)">UP11</button>
+
+
+        <div id="d2">
+            d2d2d2d2
+            <div id="d22">d22aaaaaaa</div>
+            <itip>itipitipitipitip</itip>
+            <div id="d21">
+                <div id="d211">
+                    <!--1.滚动条-->
+                    <!--2.超出部分隐藏-->
+                    <button onmouseover="show()" onclick="show()">show</button> <br>
+                    d21d21<br>
+                    d21d21<br>
+                    d21d21<br>
+                    d21d21<br>
+                </div>
+            </div>
+
+            <div id="d23"></div>
+        </div>
+    </div>
+    <button onclick="up(event)">UP</button>
+    <button onclick="down(event)">DOWN</button>
+    <!--#outer-->
+    <!--{-->
+    <!--position:absolute;-->
+    <!--left:0px;-->
+    <!--top:0px;-->
+    <!--z-index:9;-->
+    <!--width: 100px;-->
+    <!--height: 100px;-->
+    <!--background-color: red;-->
+    <!--}-->
+    <!--#inner {-->
+    <!--width: 50px;-->
+    <!--height: 50px;-->
+    <!--background-color: blue;-->
+    <!--position:absolute;-->
+    <!--z-index: 1;-->
+    <!--}-->
+
+
+    <!--<div id="outer">-->
+        <!--1231231231-->
+        <!--<div id="inner">-->
+
+        <!--</div>-->
+    <!--</div>-->
+
+
+</body>
+</html>
