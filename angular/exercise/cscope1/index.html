@@ -21,11 +21,15 @@
         <button ng-click="getData1()">ABC</button>
         <button id="ibutton">Select {{item}}</button>
     </div>
+
+    <div ng-include="'include/footer.html'" onload="console.log(2);"></div>
+    <div ng-include="'include/footer.html'" onload="console.log(2);"></div>
     <script>
         // 1 $(function () { });
         // 2 $(document).ready(function () { });
         // 3 window.onload = function () { }
         // 4. $(document).on('ready', function () { }); 这种方式不行
+        jQuery.ajaxSetup({cache:false});
         $(document).ready(function(){
             var otherScope = $('div[ng-controller="myController1"]').scope();   // Get controller's scope
             otherScope.test(); // log 'test'

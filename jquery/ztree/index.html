@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE> ZTREE DEMO </TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/libs/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
+    <!--<script type="text/javascript" src="jquery-1.4.2.js"></script>-->
+    <script src="/libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/libs/ztree/jquery.ztree.core-3.5.js"></script>
+    <!--
+      <script type="text/javascript" src="jquery.ztree.excheck.js"></script>
+      <script type="text/javascript" src="jquery.ztree.exedit.js"></script>
+    -->
+    <SCRIPT type="text/javascript" >
+        var zTreeObj,
+            setting = {
+//                view: {
+//                    selectedMulti: true
+//                }
+                key: {
+                    children: "children"
+                }
+            },
+            zTreeNodes = [
+                {id: 11, name: "采集数据", title: null, open: true,icon: "img/realTimeDataDebug/data.png", checked: false,parent: true,parentId: 0,state: "closed",text: null,children: [
+                    { id: 1, name: "通道1", title: null, open: true,icon: "img/realTimeDataDebug/device.png", checked: false,parent: true,parentId: 11,state: "closed",text: null,children:[
+                        {id: 1, name: "ANJIAN", title: null, open: false,icon: "img/realTimeDataDebug/single2.png", checked: false,parent: false,parentId: 1,state: "closed",text: null}
+                    ]},
+                    { id: 2, name: "通道17", title: null, open: true,icon: "img/realTimeDataDebug/device.png", checked: false,parent: true,parentId: 11,state: "closed",text: null,children:[
+                        {id: 2, name: "ANJIAN", title: null, open: false,icon: "img/realTimeDataDebug/single2.png", checked: false,parent: false,parentId: 2,state: "closed",text: null}
+                    ]},
+                    { id: 3, name: "通道192", title: null, open: true,icon: "img/realTimeDataDebug/device.png", checked: false,parent: true,parentId: 11,state: "closed",text: null,children:[
+                        {id: 3, name: "built-in", title: null,mLevel: 3, open: false,icon: "img/realTimeDataDebug/single2.png", checked: false,parent: false,parentId: 3,state: "closed",text: null}
+                    ]}
+                ]
+                }
+            ];
+
+        $(document).ready(function(){
+            zTreeObj = $.fn.zTree.init($("#tree"), setting, zTreeNodes);
+
+        });
+    </SCRIPT>
+</HEAD>
+
+<BODY>
+<ul id="tree" class="ztree" style="width:230px; overflow:auto;">loading</ul>
+</BODY>
+</HTML>

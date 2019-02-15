@@ -2,6 +2,20 @@
 console.log(22);
 
 var ngApp = angular.module('myApp', []);
+ngApp.config(["$provide", "$compileProvider", "$controllerProvider", "$filterProvider",
+    function($provide, $compileProvider, $controllerProvider, $filterProvider){
+        // myProviderProvider.setName("大圣");
+
+        //
+        ngApp.controller = $controllerProvider.register;
+        ngApp.directive = $compileProvider.directive;
+        ngApp.filter = $filterProvider.register;
+        ngApp.factory = $provide.factory;
+        ngApp.service = $provide.service;
+        ngApp.constant = $provide.constant;
+
+    }])
+
 ngApp.controller('myController', function ($scope, $http) {
     $scope.msg = '你好，Angular！';
     // var otherScope = $('div[ng-controller="myController1"]').scope(); 
