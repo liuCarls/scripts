@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<frameset rows="50%,50%">
+
+    <frame src="/example/html/frame_a.html">
+
+    <frameset cols="25%,75%">
+        <frame src="/example/html/frame_b.html">
+        <frame src="/example/html/frame_c.html">
+    </frameset>
+
+    <noframes>
+        <body>您的浏览器无法处理框架！
+
+        <iframe src="demo_iframe.html" frameborder="0"></iframe>
+        </body>
+    </noframes>
+</frameset>
+
+<!--使用框架的坏处：-->
+<!--开发人员必须同时跟踪更多的HTML文档-->
+<!--很难打印整张页面-->
+
+<!--不能将 <body></body> 标签与 <frameset></frameset> -->
+<!--标签同时使用！不过，假如你添加包含一段文本的 <noframes> 标签，就必须将这段文字嵌套于 <body></body> 标签内。-->
+</html>

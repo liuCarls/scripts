@@ -1,0 +1,33 @@
+CSS 语法
+@media mediatype and|not|only (media feature) {
+    CSS-Code;
+
+}
+
+也可以针对不同的媒体使用不同 stylesheets :
+<link rel="stylesheet" media="mediatype and|not|only (media feature)" href="mystylesheet.css">
+
+也可以使用@import导入
+@import url("css/moxie.css") all and (max-width:980px);
+
+
+-----------------
+媒体类型
+值                            描述
+all                            用于所有设备
+print                        用于打印机和打印预览
+screen                    用于电脑屏幕，平板电脑，智能手机等。
+speech                    应用于屏幕阅读器等发声设备
+
+媒体功能
+值                                               描述
+device-height                          定义输出设备的屏幕可见高度。
+device-width                           定义输出设备的屏幕可见宽度。
+max-device-height                 定义输出设备的屏幕可见的最大高度。
+max-device-width                  定义输出设备的屏幕最大可见宽度。
+min-device-width                   定义输出设备的屏幕最小可见宽度。
+min-device-height                  定义输出设备的屏幕的最小可见高度。
+max-height                              定义输出设备中的页面最大可见区域高度。
+max-width                               定义输出设备中的页面最大可见区域宽度。
+min-height                               定义输出设备中的页面最小可见区域高度。
+min-width                                定义输出设备中的页面最小可见区域宽度。
